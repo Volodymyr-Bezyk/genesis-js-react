@@ -1,13 +1,23 @@
 {
   "files": {
-    "main.css": "/genesis-js-react/static/css/main.7acaea2f.css",
-    "main.js": "/genesis-js-react/static/js/main.07d3183d.js",
+    "main.css": "/genesis-js-react/static/css/main.eb5f1158.css",
+    "main.js": "/genesis-js-react/static/js/main.600f0643.js",
+    "static/js/859.aea31336.chunk.js": "/genesis-js-react/static/js/859.aea31336.chunk.js",
+    "static/js/103.f90d70ab.chunk.js": "/genesis-js-react/static/js/103.f90d70ab.chunk.js",
+    "static/js/606.98a57b50.chunk.js": "/genesis-js-react/static/js/606.98a57b50.chunk.js",
+    "static/js/578.9d8f90c0.chunk.js": "/genesis-js-react/static/js/578.9d8f90c0.chunk.js",
+    "static/js/273.b4bb1c5d.chunk.js": "/genesis-js-react/static/js/273.b4bb1c5d.chunk.js",
     "index.html": "/genesis-js-react/index.html",
-    "main.7acaea2f.css.map": "/genesis-js-react/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/genesis-js-react/static/js/main.07d3183d.js.map"
+    "main.eb5f1158.css.map": "/genesis-js-react/static/css/main.eb5f1158.css.map",
+    "main.600f0643.js.map": "/genesis-js-react/static/js/main.600f0643.js.map",
+    "859.aea31336.chunk.js.map": "/genesis-js-react/static/js/859.aea31336.chunk.js.map",
+    "103.f90d70ab.chunk.js.map": "/genesis-js-react/static/js/103.f90d70ab.chunk.js.map",
+    "606.98a57b50.chunk.js.map": "/genesis-js-react/static/js/606.98a57b50.chunk.js.map",
+    "578.9d8f90c0.chunk.js.map": "/genesis-js-react/static/js/578.9d8f90c0.chunk.js.map",
+    "273.b4bb1c5d.chunk.js.map": "/genesis-js-react/static/js/273.b4bb1c5d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.eb5f1158.css",
+    "static/js/main.600f0643.js"
   ]
 }
