@@ -10,9 +10,9 @@ const setAuthHeader = token => {
 };
 
 // Utility to remove JWT
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
+// const clearAuthHeader = () => {
+//   axios.defaults.headers.common.Authorization = '';
+// };
 
 export const fetchAllCourses = createAsyncThunk(
   'courses/fetchAll',
