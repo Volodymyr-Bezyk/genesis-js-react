@@ -39,10 +39,12 @@ const theme = {
     mobile: '380px',
     tablet: '768px',
     desktop: '1280px',
+    large: '1920px',
   },
   iconSizes: {
     xs: '15px',
     s: '20px',
+    sm: '25px',
     m: '30px',
     ml: '40px',
     xl: '45px',

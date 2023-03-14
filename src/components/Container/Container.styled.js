@@ -10,10 +10,12 @@ export const StyledContainer = styled.div`
   }
   @media (min-width: ${p => p.theme.screens.tablet}) {
     max-width: ${p => p.theme.screens.tablet};
-    padding: ${p => p.theme.space[0]} ${p => p.theme.space[4]}px;
   }
   @media (min-width: ${p => p.theme.screens.desktop}) {
     max-width: ${p => p.theme.screens.desktop};
-    padding: ${p => p.theme.space[0]} ${p => p.theme.space[3]}px;
+  }
+
+  @media (min-width: ${p => p.theme.screens.large}) {
+    max-width: ${p => p.theme.screens.large};
   }
 `;

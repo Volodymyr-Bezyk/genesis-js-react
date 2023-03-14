@@ -12,8 +12,8 @@ export const SkillsBtn = styled.button`
 
   svg {
     color: ${p => p.theme.colors.primaryIcon};
-    width: ${p => p.theme.iconSizes.m};
-    height: ${p => p.theme.iconSizes.m};
+    width: ${p => p.theme.iconSizes.sm};
+    height: ${p => p.theme.iconSizes.sm};
 
     transition: ${p => p.theme.transitions.color};
   }
