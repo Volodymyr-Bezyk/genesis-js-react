@@ -4,7 +4,7 @@ import { RxModulzLogo } from 'react-icons/rx';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { MdVideoLibrary } from 'react-icons/md';
 import { SiGnuprivacyguard } from 'react-icons/si';
-import { RiLoginBoxFill, RiLogoutBoxRFill } from 'react-icons/ri';
+import { RiLoginBoxFill, RiLogoutCircleRFill } from 'react-icons/ri';
 import { ImStatsBars } from 'react-icons/im';
 import { IoMdClose } from 'react-icons/io';
 
@@ -19,6 +19,7 @@ import {
   Nav,
   MobileMenuCloseBtn,
   NavWrap,
+  LogoutBtnWrap,
   LogoutBtn,
   LogoutBtnText,
 } from './Menu.styled';
@@ -53,10 +54,12 @@ const Menu = () => {
           />
           <MenuLink title="Login" icon={<RiLoginBoxFill />} path="login" />
         </Nav>
-        <LogoutBtn type="button">
-          <RiLogoutBoxRFill />
-          <LogoutBtnText>Logout</LogoutBtnText>
-        </LogoutBtn>
+        <LogoutBtnWrap>
+          <LogoutBtn type="button">
+            <RiLogoutCircleRFill />
+            <LogoutBtnText>Logout</LogoutBtnText>
+          </LogoutBtn>
+        </LogoutBtnWrap>
       </NavWrap>
     </MenuWrap>
   );

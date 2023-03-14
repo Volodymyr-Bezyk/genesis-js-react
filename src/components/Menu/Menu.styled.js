@@ -62,9 +62,11 @@ export const NavWrap = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 999;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: ${p => p.theme.colors.white};
     transition: ${p => p.theme.transitions.transform},
       ${p => p.theme.transitions.opacity};
@@ -78,7 +80,8 @@ export const Nav = styled.nav`
   padding: ${p => p.theme.space[4]}px ${p => p.theme.space[4]}px;
 
   @media (max-width: 767px) {
-    width: ${p => p.theme.screens.mobile};
+    width: 100vw;
+    max-width: ${p => p.theme.screens.mobile};
   }
   @media (min-width: ${p => p.theme.screens.tablet}) {
     padding: ${p => p.theme.space[4]}px ${p => p.theme.space[0]}px;
@@ -105,6 +108,19 @@ export const MobileMenuCloseBtn = styled.button`
 
   @media (min-width: ${p => p.theme.screens.tablet}) {
     display: none;
+  }
+`;
+
+export const LogoutBtnWrap = styled.div`
+  padding: ${p => p.theme.space[4]}px ${p => p.theme.space[4]}px;
+  border-top: 1px solid ${p => p.theme.colors.border};
+
+  @media (max-width: 767px) {
+    width: 100vw;
+    max-width: ${p => p.theme.screens.mobile};
+  }
+  @media (min-width: ${p => p.theme.screens.tablet}) {
+    padding: ${p => p.theme.space[4]}px ${p => p.theme.space[0]}px;
   }
 `;
 

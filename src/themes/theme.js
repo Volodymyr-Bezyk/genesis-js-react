@@ -11,6 +11,9 @@ const theme = {
     userName: '#25364f',
     userEmail: '#8b8b8b',
     hover: '#00DB99',
+    course: '#E5E5E5;',
+    badge: '#F9F9F9',
+    delimetr: '#CDDCEE',
   },
 
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -29,14 +32,17 @@ const theme = {
   },
   radii: {
     input: '8px',
+    badge: '8px',
   },
 
   screens: {
-    mobile: '320px',
+    mobile: '380px',
     tablet: '768px',
     desktop: '1280px',
   },
   iconSizes: {
+    xs: '15px',
+    s: '20px',
     m: '30px',
     ml: '40px',
     xl: '45px',
@@ -46,6 +52,9 @@ const theme = {
     opacity: 'opacity 400ms ease-in-out',
     color: 'color 300ms ease-in-out',
     borderColor: 'border-color 300ms ease-in-out',
+  },
+  shadows: {
+    card: '0px 1px 3px rgb(0 0 0 / 12%), 0px 1px 1px rgb(0 0 0 / 14%), 0px 2px 1px rgb(0 0 0 / 20%)',
   },
 };
 

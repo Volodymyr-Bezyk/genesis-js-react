@@ -1,98 +1,81 @@
 import styled from 'styled-components';
 
-export const HomeBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: ${p => p.theme.space[3]}px;
-  border-bottom: 1px solid ${p => p.theme.colors.border};
+export const CoursesList = styled.ul`
+  padding: ${p => p.theme.space[2]}px ${p => p.theme.space[0]}px;
 `;
+export const CoursesItem = styled.li`
+  display: block;
+  width: 100%;
+  max-width: ${p => p.theme.screens.mobile};
 
-export const SearchForm = styled.form`
-  display: none;
-  @media (min-width: ${p => p.theme.screens.tablet}) {
-    display: block;
-    position: relative;
-  }
-`;
-
-export const SearchBtn = styled.button`
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  font-family: inherit;
-  border: none;
-  cursor: pointer;
-  background-color: ${p => p.theme.colors.transparent};
-
-  svg {
-    width: 16px;
-    height: 16px;
-    color: ${p => p.theme.colors.userEmail};
-    transition: ${p => p.theme.transitions.color};
-  }
-
-  :hover,
-  :focus {
-    svg {
-      color: ${p => p.theme.colors.hover};
-    }
-  }
-`;
-
-export const SearchInput = styled.input`
-  padding: ${p => p.theme.space[2]}px ${p => p.theme.space[4]}px;
-  width: 200px;
-
+  border: 1px solid ${p => p.theme.colors.course};
   border-radius: ${p => p.theme.radii.input};
-  background-color: ${p => p.theme.colors.border};
-  outline: none;
-  border: 1px solid ${p => p.theme.colors.transparent};
-  transition: ${p => p.theme.transitions.borderColor};
+  box-shadow: ${p => p.theme.shadows.card};
+  overflow: hidden;
 
+  :not(:last-child) {
+    margin-bottom: ${p => p.theme.space[3]}px;
+  }
+`;
+
+export const CourseCardWrap = styled.div`
+  position: relative;
+  overflow: hidden;
+`;
+export const CoursesTitle = styled.h3`
+  padding: ${p => p.theme.space[1]}px ${p => p.theme.space[2]}px;
+  max-width: calc(100% - 35px);
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes[5]}px;
+  line-height: 1.17;
+  color: ${p => p.theme.colors.title};
+`;
+
+export const VideoWrap = styled.div`
+  position: relative;
+`;
+
+export const Video = styled.video`
+  display: block;
+  width: 100%;
+  max-width: ${p => p.theme.screens.mobile};
+`;
+
+export const CoursesText = styled.p`
+  padding: ${p => p.theme.space[1]}px ${p => p.theme.space[2]}px;
   font-weight: ${p => p.theme.fontWeights.regular};
   font-size: ${p => p.theme.fontSizes[3]}px;
-  line-height: 1.14;
-  color: ${p => p.theme.colors.userEmail};
-
-  :focus {
-    border-color: ${p => p.theme.colors.hover};
-  }
-
-  @media (min-width: ${p => p.theme.screens.desktop}) {
-    width: 440px;
-  }
-`;
-
-export const UserInfo = styled.div`
-  display: none;
-  @media (min-width: ${p => p.theme.screens.tablet}) {
-    display: block;
-  }
-`;
-export const UserName = styled.div`
-  font-weight: ${p => p.theme.fontWeights.medium};
-  font-size: ${p => p.theme.fontSizes[4]}px;
-  line-height: 1.19;
-  color: ${p => p.theme.colors.userName};
-
-  @media (min-width: ${p => p.theme.screens.desktop}) {
-    font-size: ${p => p.theme.fontSizes[5]}px;
-  }
-`;
-export const UserEmail = styled.div`
-  font-weight: ${p => p.theme.fontWeights.regular};
-  font-size: ${p => p.theme.fontSizes[2]}px;
   line-height: 1.17;
-  color: ${p => p.theme.colors.userEmail};
+  color: ${p => p.theme.colors.primaryLink};
+`;
 
-  @media (min-width: ${p => p.theme.screens.desktop}) {
-    font-size: ${p => p.theme.fontSizes[3]}px;
+export const LessonsRatingList = styled.ul`
+  position: absolute;
+  top: 5px;
+  left: 5px;
+
+  background-color: ${p => p.theme.colors.badge};
+  border-radius: ${p => p.theme.radii.badge};
+
+  display: flex;
+`;
+export const LessonsRatingItem = styled.li`
+  padding: ${p => p.theme.space[1]}px ${p => p.theme.space[2]}px;
+  :not(:last-child) {
+    border-right: 1px solid ${p => p.theme.colors.delimetr};
   }
+`;
+export const LessonsRatingValue = styled.p`
+  text-align: center;
+  font-weight: ${p => p.theme.fontWeights.bold};
+  font-size: ${p => p.theme.fontSizes[4]}px;
+  line-height: 1;
+  color: ${p => p.theme.colors.title};
+`;
+export const LessonsRatingDesc = styled.p`
+  text-align: center;
+  font-weight: ${p => p.theme.fontWeights.regular};
+  font-size: ${p => p.theme.fontSizes[1]}px;
+  line-height: 1;
+  color: ${p => p.theme.colors.primaryLink};
 `;
