@@ -12,7 +12,7 @@ import {
   SkillsListItem,
 } from './SkillsBlock.styled';
 
-const SkillsBlock = () => {
+const SkillsBlock = ({ skills = [], tags = [] }) => {
   const [skillsShown, setSkillsShown] = useState(false);
 
   return (
@@ -28,15 +28,19 @@ const SkillsBlock = () => {
 
         <SkillsTitle>Skills:</SkillsTitle>
         <SkillsList>
-          <SkillsListItem>
-            <SkillsBlockItem text="Aligning your goals with your motives" />
-          </SkillsListItem>
-          <SkillsListItem>
-            <SkillsBlockItem text="Overcoming decision paralysis" />
-          </SkillsListItem>
-          <SkillsListItem>
-            <SkillsBlockItem text="Reframing negative self-talk" />
-          </SkillsListItem>
+          {skills.map(skill => (
+            <SkillsListItem key={skill}>
+              <SkillsBlockItem text={skill} />
+            </SkillsListItem>
+          ))}
+        </SkillsList>
+        <SkillsTitle>Tags:</SkillsTitle>
+        <SkillsList>
+          {tags.map(tag => (
+            <SkillsListItem key={tag}>
+              <SkillsBlockItem text={tag} />
+            </SkillsListItem>
+          ))}
         </SkillsList>
       </SkillsBlockWrap>
     </>

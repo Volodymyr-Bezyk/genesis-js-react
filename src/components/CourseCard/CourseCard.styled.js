@@ -5,7 +5,7 @@ export const CourseCardWrap = styled.div`
   overflow: hidden;
 `;
 export const CoursesTitle = styled.h3`
-  padding: ${p => p.theme.space[1]}px ${p => p.theme.space[2]}px;
+  padding: ${p => p.theme.space[2]}px ${p => p.theme.space[2]}px;
   max-width: calc(100% - 35px);
   font-weight: ${p => p.theme.fontWeights.medium};
   font-size: ${p => p.theme.fontSizes[5]}px;
@@ -20,13 +20,26 @@ export const VideoWrap = styled.div`
 export const Video = styled.video`
   display: block;
   width: 100%;
-  max-height: calc(100% / 16 * 9);
+  height: 197px;
+  object-fit: cover;
+
+  @media (min-width: ${p => p.theme.screens.tablet}) {
+    height: 300px;
+  }
+
+  @media (min-width: ${p => p.theme.screens.desktop}) {
+    height: 292px;
+  }
+
+  @media (min-width: ${p => p.theme.screens.large}) {
+    height: 313px;
+  }
 `;
 
 export const CoursesText = styled.p`
-  padding: ${p => p.theme.space[1]}px ${p => p.theme.space[2]}px;
+  padding: ${p => p.theme.space[2]}px ${p => p.theme.space[2]}px;
   font-weight: ${p => p.theme.fontWeights.regular};
-  font-size: ${p => p.theme.fontSizes[3]}px;
+  font-size: ${p => p.theme.fontSizes[4]}px;
   line-height: 1.17;
   color: ${p => p.theme.colors.primaryLink};
 `;

@@ -12,8 +12,8 @@ export const SkillsBtn = styled.button`
 
   svg {
     color: ${p => p.theme.colors.primaryIcon};
-    width: ${p => p.theme.iconSizes.sm};
-    height: ${p => p.theme.iconSizes.sm};
+    width: ${p => p.theme.iconSizes.m};
+    height: ${p => p.theme.iconSizes.m};
 
     transition: ${p => p.theme.transitions.color};
   }
@@ -64,10 +64,11 @@ export const SkillsCloseBtn = styled.button`
 `;
 
 export const SkillsTitle = styled.p`
+  margin-bottom: ${p => p.theme.space[2]}px;
   padding: ${p => p.theme.space[1]}px ${p => p.theme.space[2]}px;
   max-width: calc(100% - 35px);
   font-weight: ${p => p.theme.fontWeights.medium};
-  font-size: ${p => p.theme.fontSizes[5]}px;
+  font-size: ${p => p.theme.fontSizes[7]}px;
   line-height: 1.17;
   color: ${p => p.theme.colors.title};
 `;

@@ -12,36 +12,44 @@ import {
   LessonsRatingDesc,
 } from './CourseCard.styled';
 
-const CourseCard = () => {
+const CourseCard = ({ course }) => {
+  const {
+    title,
+    previewImageLink,
+    description,
+    duration,
+    lessonsCount,
+    rating,
+    tags,
+    meta: { courseVideoPreview, skills },
+  } = course;
+
   return (
     <CourseCardWrap>
-      <CoursesTitle>Lack of Motivation & How to Overcome It</CoursesTitle>
+      <CoursesTitle>{title}</CoursesTitle>
       <VideoWrap>
-        <Video
-          poster="https://wisey.app/assets/images/web/course-covers/lack-of-motivation-how-to-overcome-it/cover.webp"
-          controls
-        >
-          <source
-            src="http://techslides.com/demos/sample-videos/small.webm"
-            type="video/webm"
-          />
+        <Video poster={previewImageLink + '/cover.webp'} controls>
+          <source src={courseVideoPreview?.link} type="video/webm" />
         </Video>
         <LessonsRatingList>
           <LessonsRatingItem>
-            <LessonsRatingValue>2</LessonsRatingValue>
+            <LessonsRatingValue>{lessonsCount}</LessonsRatingValue>
             <LessonsRatingDesc>Lessons</LessonsRatingDesc>
           </LessonsRatingItem>
           <LessonsRatingItem>
-            <LessonsRatingValue>3.5</LessonsRatingValue>
+            <LessonsRatingValue>{rating}</LessonsRatingValue>
             <LessonsRatingDesc>Rating</LessonsRatingDesc>
+          </LessonsRatingItem>
+          <LessonsRatingItem>
+            <LessonsRatingValue>
+              {Math.round(+duration / 60)}
+            </LessonsRatingValue>
+            <LessonsRatingDesc>Hours</LessonsRatingDesc>
           </LessonsRatingItem>
         </LessonsRatingList>
       </VideoWrap>
-      <CoursesText>
-        Reignite your inner drive by managing factors that dampen your
-        motivation.
-      </CoursesText>
-      <SkillsBlock />
+      <CoursesText>{description}</CoursesText>
+      <SkillsBlock skills={skills} tags={tags} />
     </CourseCardWrap>
   );
 };

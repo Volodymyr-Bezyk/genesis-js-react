@@ -21,7 +21,7 @@ export const CoursesItem = styled.li`
   box-shadow: ${p => p.theme.shadows.card};
   overflow: hidden;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1279px) {
     :not(:last-child) {
       margin-bottom: ${p => p.theme.space[3]}px;
     }
@@ -29,7 +29,6 @@ export const CoursesItem = styled.li`
 
   @media (min-width: ${p => p.theme.screens.tablet}) {
     flex-basis: 100%;
-    /* max-width: ${p => p.theme.screens.tablet}; */
   }
 
   @media (min-width: ${p => p.theme.screens.desktop}) {

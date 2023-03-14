@@ -8,15 +8,21 @@ export const HomeBarWrap = styled.div`
   border-bottom: 1px solid ${p => p.theme.colors.border};
 `;
 
-export const SearchForm = styled.form`
+export const SearchLabel = styled.label`
   display: none;
+
+  :focus-within {
+    svg {
+      color: ${p => p.theme.colors.hover};
+    }
+  }
   @media (min-width: ${p => p.theme.screens.tablet}) {
     display: block;
     position: relative;
   }
 `;
 
-export const SearchBtn = styled.button`
+export const SearchIcon = styled.span`
   position: absolute;
   top: 50%;
   left: 10px;
@@ -26,23 +32,11 @@ export const SearchBtn = styled.button`
   justify-content: center;
   align-items: center;
 
-  font-family: inherit;
-  border: none;
-  cursor: pointer;
-  background-color: ${p => p.theme.colors.transparent};
-
   svg {
     width: 16px;
     height: 16px;
     color: ${p => p.theme.colors.userEmail};
     transition: ${p => p.theme.transitions.color};
-  }
-
-  :hover,
-  :focus {
-    svg {
-      color: ${p => p.theme.colors.hover};
-    }
   }
 `;
 

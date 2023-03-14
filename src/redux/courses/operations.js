@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://api.wisey.app/api/v1/core';
-// axios.defaults.baseURL = '{{host}}/{{version}}/core';
+axios.defaults.baseURL = 'https://api.wisey.app/api/v1/core/preview-courses';
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YTMyNDBmOC05NGYzLTQ4ODQtOGRkNy1jYTMzNjQ2NzUwYWIiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2Nzg4MTE1MTQsImV4cCI6MTY3OTcxMTUxNH0.TuNH5nyTnNMjwZ1yQVKiBkBCoaWA-GuRzhsXBqpra8U';
 
 // Utility to add JWT
 const setAuthHeader = token => {
@@ -18,20 +19,12 @@ export const fetchAllCourses = createAsyncThunk(
   'courses/fetchAll',
   async (controller, thunkAPI) => {
     try {
-      setAuthHeader(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxODY3ZDFhYi1mNWRiLTRkYTAtYjVjZC0yNGEwYjMwYmU2NGQiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2Nzg4MDkzMjksImV4cCI6MTY3OTcwOTMyOX0.mRsBJcuu-BlXOg-dZezxyLwNsSuAIHzBvUgrZ2Fvkqc'
-      );
-      const response = await axios.get(
-        'https://api.wisey.app/api/v1/core/preview-courses'
-        // '{{host}}/{{version}}/core/preview-courses'
-        // {
-        //   signal: controller.signal,
-        // }
-      );
-      console.log('data', response.data);
-      return response.data;
+      setAuthHeader(token);
+      const response = await axios.get('/', {
+        signal: controller.signal,
+      });
+      return response.data.courses;
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

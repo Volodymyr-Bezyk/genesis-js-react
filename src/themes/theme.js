@@ -54,6 +54,7 @@ const theme = {
     opacity: 'opacity 400ms ease-in-out',
     color: 'color 300ms ease-in-out',
     borderColor: 'border-color 300ms ease-in-out',
+    backgroundColor: 'background-color 300ms ease-in-out',
   },
   shadows: {
     card: '0px 1px 3px rgb(0 0 0 / 12%), 0px 1px 1px rgb(0 0 0 / 14%), 0px 2px 1px rgb(0 0 0 / 20%)',

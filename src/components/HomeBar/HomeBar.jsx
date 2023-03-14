@@ -1,26 +1,43 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { BsSearch } from 'react-icons/bs';
+
 import PageTitle from 'components/PageTitle';
+
+import { setFilterValue } from 'redux/filter/filterSlice';
+import { selectFilter } from 'redux/selectors';
 
 import {
   HomeBarWrap,
   UserInfo,
   UserName,
   UserEmail,
-  SearchForm,
+  SearchLabel,
   SearchInput,
-  SearchBtn,
+  SearchIcon,
 } from './HomeBar.styled';
 
 const HomeBar = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
+
+  const handleInput = e => {
+    dispatch(setFilterValue(e.target.value.trim()));
+  };
+
   return (
     <HomeBarWrap>
       <PageTitle title="Courses" />
-      <SearchForm>
-        <SearchInput type="text" placeholder="Search" />
-        <SearchBtn type="submit">
+      <SearchLabel>
+        <SearchInput
+          type="text"
+          placeholder="Search"
+          value={filter}
+          onInput={handleInput}
+        />
+        <SearchIcon>
           <BsSearch />
-        </SearchBtn>
-      </SearchForm>
+        </SearchIcon>
+      </SearchLabel>
       <UserInfo>
         <UserName>Asfak Mahmud</UserName>
         <UserEmail>asfakmahmudbd@gmaill.com</UserEmail>

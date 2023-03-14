@@ -9,6 +9,13 @@ export const MenuWrap = styled.header`
   } ;
 `;
 
+export const StickyWrap = styled.div`
+  @media (min-width: ${p => p.theme.screens.tablet}) {
+    position: sticky;
+    top: 32px;
+  }
+`;
+
 export const LogoText = styled.span`
   margin-left: ${p => p.theme.space[3]}px;
 
