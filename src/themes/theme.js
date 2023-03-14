@@ -3,6 +3,9 @@ const theme = {
     transparent: 'transparent',
     primaryLink: '#717986',
     primaryText: '  #000000',
+    primaryIcon: '#FF285C',
+    logo: '#0075FF',
+    white: '#FFFFFF',
   },
 
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -25,6 +28,15 @@ const theme = {
     mobile: '320px',
     tablet: '768px',
     desktop: '1280px',
+  },
+  iconSizes: {
+    m: '30px',
+    ml: '40px',
+    xl: '45px',
+  },
+  transitions: {
+    transform: 'transform 400ms ease-in-out',
+    opacity: 'opacity 400ms ease-in-out',
   },
 };
 
