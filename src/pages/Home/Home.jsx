@@ -8,12 +8,15 @@ import PageWrap from 'components/PageWrap';
 import HomeBar from 'components/HomeBar';
 import CourseCard from 'components/CourseCard';
 import PaginateCourses from 'components/PaginateCourses';
+import { selectFilter } from 'redux/selectors';
 
 import { CoursesList, CoursesItem } from './Home.styled';
 
 const Home = () => {
   const dispatch = useDispatch();
   const courses = useSelector(selectFilteredCourses);
+  const filter = useSelector(selectFilter);
+
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + 10;
   const currentCourses = courses.slice(itemOffset, endOffset);
@@ -22,11 +25,12 @@ const Home = () => {
   useEffect(() => {
     const controller = new AbortController();
     dispatch(fetchAllCourses(controller));
+    setItemOffset(0);
 
     return () => {
       controller.abort();
     };
-  }, [dispatch]);
+  }, [dispatch, filter]);
 
   const handlePageClick = event => {
     const newOffset = (event.selected * 10) % courses.length;
@@ -47,6 +51,7 @@ const Home = () => {
       <PaginateCourses
         handlePageClick={handlePageClick}
         pageCount={pageCount}
+        itemOffset={itemOffset}
       />
     </PageWrap>
   );
