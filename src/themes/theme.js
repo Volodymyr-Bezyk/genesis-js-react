@@ -6,6 +6,11 @@ const theme = {
     primaryIcon: '#FF285C',
     logo: '#0075FF',
     white: '#FFFFFF',
+    title: '#3c557a',
+    border: '#F1F2F7',
+    userName: '#25364f',
+    userEmail: '#8b8b8b',
+    hover: '#00DB99',
   },
 
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -22,7 +27,9 @@ const theme = {
     medium: 500,
     bold: 700,
   },
-  radii: {},
+  radii: {
+    input: '8px',
+  },
 
   screens: {
     mobile: '320px',
@@ -37,6 +44,8 @@ const theme = {
   transitions: {
     transform: 'transform 400ms ease-in-out',
     opacity: 'opacity 400ms ease-in-out',
+    color: 'color 300ms ease-in-out',
+    borderColor: 'border-color 300ms ease-in-out',
   },
 };
 

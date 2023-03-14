@@ -5,3 +5,8 @@ export const LayoutWrap = styled.div`
     display: flex;
   }
 `;
+export const MainContent = styled.main`
+  @media (min-width: ${p => p.theme.screens.tablet}) {
+    flex-grow: 1;
+  }
+`;

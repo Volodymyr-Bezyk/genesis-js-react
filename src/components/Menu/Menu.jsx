@@ -19,10 +19,12 @@ import {
   Nav,
   MobileMenuCloseBtn,
   NavWrap,
+  LogoutBtn,
+  LogoutBtnText,
 } from './Menu.styled';
 
 const Menu = () => {
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <MenuWrap>
@@ -42,7 +44,7 @@ const Menu = () => {
           <MobileMenuCloseBtn type="button" onClick={() => setShowMenu(false)}>
             <IoMdClose />
           </MobileMenuCloseBtn>
-          <MenuLink title="Dashboard" icon={<ImStatsBars />} path="" />
+          <MenuLink title="Dashboard" icon={<ImStatsBars />} path="dashboard" />
           <MenuLink title="Courses" icon={<MdVideoLibrary />} path="/" />
           <MenuLink
             title="Register"
@@ -50,12 +52,11 @@ const Menu = () => {
             path="register"
           />
           <MenuLink title="Login" icon={<RiLoginBoxFill />} path="login" />
-          <MenuLink
-            title="Logout"
-            icon={<RiLogoutBoxRFill />}
-            //   path="login"
-          />
         </Nav>
+        <LogoutBtn type="button">
+          <RiLogoutBoxRFill />
+          <LogoutBtnText>Logout</LogoutBtnText>
+        </LogoutBtn>
       </NavWrap>
     </MenuWrap>
   );

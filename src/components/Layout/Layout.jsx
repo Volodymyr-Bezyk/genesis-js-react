@@ -3,16 +3,18 @@ import { Outlet } from 'react-router-dom';
 
 import Container from 'components/Container';
 import Menu from 'components/Menu';
-import { LayoutWrap } from './Layout.styled';
+import { LayoutWrap, MainContent } from './Layout.styled';
 
 const Layout = () => {
   return (
     <Container>
       <LayoutWrap>
         <Menu />
-        <Suspense fallback={null}>
-          <Outlet />
-        </Suspense>
+        <MainContent>
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
+        </MainContent>
       </LayoutWrap>
     </Container>
   );
