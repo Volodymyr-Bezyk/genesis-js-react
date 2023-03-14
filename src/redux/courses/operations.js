@@ -22,7 +22,7 @@ export const fetchAllCourses = createAsyncThunk(
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxODY3ZDFhYi1mNWRiLTRkYTAtYjVjZC0yNGEwYjMwYmU2NGQiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2Nzg4MDkzMjksImV4cCI6MTY3OTcwOTMyOX0.mRsBJcuu-BlXOg-dZezxyLwNsSuAIHzBvUgrZ2Fvkqc'
       );
       const response = await axios.get(
-        'http://api.wisey.app/api/v1/core/preview-courses'
+        'https://api.wisey.app/api/v1/core/preview-courses'
         // '{{host}}/{{version}}/core/preview-courses'
         // {
         //   signal: controller.signal,
