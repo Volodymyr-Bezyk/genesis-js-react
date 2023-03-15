@@ -4,12 +4,12 @@ import { AiOutlineClose } from 'react-icons/ai';
 import SkillsBlockItem from 'components/SkillsBlockItem';
 
 import {
-  SkillsBlockWrap,
-  SkillsBtn,
-  SkillsCloseBtn,
-  SkillsTitle,
-  SkillsList,
-  SkillsListItem,
+  AddInfoBtn,
+  AddInfoBlockWrap,
+  AddInfoCloseBtn,
+  AddInfoTitle,
+  AddInfoList,
+  AddInfoItem,
 } from './SkillsBlock.styled';
 
 const SkillsBlock = ({ skills = [], tags = [] }) => {
@@ -17,32 +17,32 @@ const SkillsBlock = ({ skills = [], tags = [] }) => {
 
   return (
     <>
-      <SkillsBtn onClick={() => setSkillsShown(true)}>
+      <AddInfoBtn onClick={() => setSkillsShown(true)}>
         <GiSkills />
-      </SkillsBtn>
+      </AddInfoBtn>
 
-      <SkillsBlockWrap skillsShown={skillsShown}>
-        <SkillsCloseBtn onClick={() => setSkillsShown(false)}>
+      <AddInfoBlockWrap skillsShown={skillsShown}>
+        <AddInfoCloseBtn onClick={() => setSkillsShown(false)}>
           <AiOutlineClose />
-        </SkillsCloseBtn>
+        </AddInfoCloseBtn>
 
-        <SkillsTitle>Skills:</SkillsTitle>
-        <SkillsList>
+        <AddInfoTitle>Skills:</AddInfoTitle>
+        <AddInfoList>
           {skills.map(skill => (
-            <SkillsListItem key={skill}>
+            <AddInfoItem key={skill}>
               <SkillsBlockItem text={skill} />
-            </SkillsListItem>
+            </AddInfoItem>
           ))}
-        </SkillsList>
-        <SkillsTitle>Tags:</SkillsTitle>
-        <SkillsList>
+        </AddInfoList>
+        <AddInfoTitle>Tags:</AddInfoTitle>
+        <AddInfoList>
           {tags.map(tag => (
-            <SkillsListItem key={tag}>
+            <AddInfoItem key={tag}>
               <SkillsBlockItem text={tag} />
-            </SkillsListItem>
+            </AddInfoItem>
           ))}
-        </SkillsList>
-      </SkillsBlockWrap>
+        </AddInfoList>
+      </AddInfoBlockWrap>
     </>
   );
 };

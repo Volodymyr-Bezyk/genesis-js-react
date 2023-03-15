@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SkillsBtn = styled.button`
+export const AddInfoBtn = styled.button`
   position: absolute;
   top: 4px;
   right: 4px;
@@ -25,7 +25,7 @@ export const SkillsBtn = styled.button`
   }
 `;
 
-export const SkillsBlockWrap = styled.div`
+export const AddInfoBlockWrap = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -40,7 +40,7 @@ export const SkillsBlockWrap = styled.div`
   transform: ${p => (p.skillsShown ? 'translateY(0)' : 'translateY(100%)')};
 `;
 
-export const SkillsCloseBtn = styled.button`
+export const AddInfoCloseBtn = styled.button`
   display: block;
   margin-left: auto;
   font-family: inherit;
@@ -63,7 +63,7 @@ export const SkillsCloseBtn = styled.button`
   }
 `;
 
-export const SkillsTitle = styled.p`
+export const AddInfoTitle = styled.p`
   margin-bottom: ${p => p.theme.space[2]}px;
   padding: ${p => p.theme.space[1]}px ${p => p.theme.space[2]}px;
   max-width: calc(100% - 35px);
@@ -73,9 +73,9 @@ export const SkillsTitle = styled.p`
   color: ${p => p.theme.colors.title};
 `;
 
-export const SkillsList = styled.ul``;
+export const AddInfoList = styled.ul``;
 
-export const SkillsListItem = styled.li`
+export const AddInfoItem = styled.li`
   display: flex;
   align-items: center;
 

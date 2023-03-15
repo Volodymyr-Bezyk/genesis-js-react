@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const CourseCardWrap = styled.div`
   position: relative;
@@ -13,8 +14,9 @@ export const CoursesTitle = styled.h3`
   color: ${p => p.theme.colors.title};
 `;
 
-export const VideoWrap = styled.div`
+export const VideoLink = styled(Link)`
   position: relative;
+  display: block;
 `;
 
 export const Video = styled.video`

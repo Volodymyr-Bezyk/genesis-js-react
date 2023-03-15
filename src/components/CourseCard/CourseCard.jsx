@@ -3,7 +3,7 @@ import SkillsBlock from 'components/SkillsBlock';
 import {
   CourseCardWrap,
   CoursesTitle,
-  VideoWrap,
+  VideoLink,
   Video,
   CoursesText,
   LessonsRatingList,
@@ -14,6 +14,7 @@ import {
 
 const CourseCard = ({ course }) => {
   const {
+    id,
     title,
     previewImageLink,
     description,
@@ -27,8 +28,8 @@ const CourseCard = ({ course }) => {
   return (
     <CourseCardWrap>
       <CoursesTitle>{title}</CoursesTitle>
-      <VideoWrap>
-        <Video poster={previewImageLink + '/cover.webp'} controls>
+      <VideoLink to={`course/${id}`}>
+        <Video poster={previewImageLink + '/cover.webp'}>
           <source src={courseVideoPreview?.link} type="video/webm" />
         </Video>
         <LessonsRatingList>
@@ -47,7 +48,7 @@ const CourseCard = ({ course }) => {
             <LessonsRatingDesc>Hours</LessonsRatingDesc>
           </LessonsRatingItem>
         </LessonsRatingList>
-      </VideoWrap>
+      </VideoLink>
       <CoursesText>{description}</CoursesText>
       <SkillsBlock skills={skills} tags={tags} />
     </CourseCardWrap>
