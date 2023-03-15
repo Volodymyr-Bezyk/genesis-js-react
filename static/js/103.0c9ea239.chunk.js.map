@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/103.0c9ea239.chunk.js","mappings":"iMAIA,EAJe,WACb,OAAO,wCACR,C","sources":["pages/Course/Course.jsx"],"sourcesContent":["const Course = () => {\n  return <div>Course Page</div>;\n};\n\nexport default Course;\n"],"names":[],"sourceRoot":""}
