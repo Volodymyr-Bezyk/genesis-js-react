@@ -1,3 +1,6 @@
+import { useRef } from 'react';
+import { useEffect } from 'react';
+import Hls from 'hls.js';
 import SkillsBlock from 'components/SkillsBlock';
 
 import {
@@ -25,13 +28,27 @@ const CourseCard = ({ course }) => {
     meta: { courseVideoPreview, skills },
   } = course;
 
+  const videoRef = useRef();
+  const hls = useRef(new Hls());
+  const test = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+
+  // console.log('course', id, courseVideoPreview?.link);
+
+  useEffect(() => {
+    hls.current.loadSource(courseVideoPreview?.link ?? test);
+    hls.current.attachMedia(videoRef.current);
+  }, [courseVideoPreview?.link]);
+
   return (
     <CourseCardWrap>
       <CoursesTitle>{title}</CoursesTitle>
       <VideoLink to={`course/${id}`}>
-        <Video poster={previewImageLink + '/cover.webp'}>
-          <source src={courseVideoPreview?.link} type="video/webm" />
-        </Video>
+        <Video
+          poster={previewImageLink + '/cover.webp'}
+          ref={videoRef}
+          controls
+          muted
+        ></Video>
         <LessonsRatingList>
           <LessonsRatingItem>
             <LessonsRatingValue>{lessonsCount}</LessonsRatingValue>

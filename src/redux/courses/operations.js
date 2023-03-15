@@ -3,7 +3,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api.wisey.app/api/v1/core/preview-courses';
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YjA4OTVmNi04ZmEzLTQ4MDYtYmYzMi0xZTIyZmEwMDQ1ZWUiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2Nzg4NjI0NzUsImV4cCI6MTY3OTc2MjQ3NX0.UI6H3t04-0_tZj3eh9n74-K-qsu2MQ08vCWfYOGf7ig';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOGQ1NWJjMy0yNmFhLTQ4YzAtOGExZS1kMjEyMzI2ZGY3ZDgiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2Nzg4ODI4NDEsImV4cCI6MTY3OTc4Mjg0MX0.-V_omC-Vb0OMYcRT9X5uEc-95mDg8V-ikvkUoUSJlxQ';
 
 // Utility to add JWT
 const setAuthHeader = token => {

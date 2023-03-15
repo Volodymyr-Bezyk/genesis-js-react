@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-
-import { FcNext, FcPrevious } from 'react-icons/fc';
+import Hls from 'hls.js';
+import { getOneCourseById } from 'utils/getOneCourseById';
 
 import PageWrap from 'components/PageWrap';
 import PageTitle from 'components/PageTitle';
@@ -15,75 +15,77 @@ import {
   LessonsWrap,
   LessonsList,
   LessonsListItem,
-  LessonsBtnLeft,
-  LessonsBtnRight,
 } from './Course.styled';
 
 const Course = () => {
   const { courseId } = useParams();
+  const [isLoading, setLoading] = useState(false);
+  const [, setError] = useState(null);
   const [course, setCourse] = useState(null);
   const [activeLessonIdx, setActiveLessonIdx] = useState(0);
-
-  console.log('activeLessonIdx', activeLessonIdx);
+  const videoRef = useRef();
+  const hls = useRef(new Hls());
 
   useEffect(() => {
     const controller = new AbortController();
-    const getCourseById = async (controller, id) => {
+
+    const getCourse = async () => {
       try {
-        const response = await axios.get(`/${id}`, {
-          signal: controller.signal,
-        });
-        setCourse(response.data);
-        return response.data;
-      } catch (error) {}
+        setLoading(true);
+        const courseInfo = await getOneCourseById(controller, courseId);
+        setCourse(courseInfo);
+        setLoading(false);
+        return courseInfo;
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
     };
-    getCourseById(controller, courseId);
+    getCourse();
 
     return () => {
       controller.abort();
     };
   }, [courseId]);
 
-  if (!course) return;
-  const { title, lessons, previewImageLink } = course;
+  if (course) {
+    // console.log('INSIDE videoRef.current', videoRef.current);
+    // console.log('activeLessonIdx', activeLessonIdx);
+    // console.log('link', course.lessons[activeLessonIdx].link);
+    hls.current.loadSource(course.lessons[activeLessonIdx].link);
+    hls.current.attachMedia(videoRef.current);
+  }
+
+  if (isLoading) return;
 
   return (
     <PageWrap>
-      <PageTitle title={title} />
+      {course?.title && <PageTitle title={course.title} />}
       <VideoWrap>
-        <Video
-          poster={previewImageLink + '/cover.webp'}
-          controls
-          preload="metadata"
-          crossorigin
-        >
-          <source
-            src="http://techslides.com/demos/sample-videos/small.webm"
-            type="video/webm"
-          />
-        </Video>
+        <Video ref={videoRef} controls preload="auto"></Video>
       </VideoWrap>
-      <LessonsTitle>Lessons in this course: {lessons.length}</LessonsTitle>
+      {course && (
+        <>
+          <LessonsTitle>
+            Lessons in this course: {course.lessons.length}
+          </LessonsTitle>
 
-      <LessonsWrap>
-        <LessonsBtnLeft type="button">
-          <FcPrevious />
-        </LessonsBtnLeft>
-        <LessonsList>
-          {lessons.map((lesson, idx) => (
-            <LessonsListItem key={lesson.id}>
-              <LessonItem
-                lesson={lesson}
-                idx={idx}
-                setActiveLessonIdx={setActiveLessonIdx}
-              />
-            </LessonsListItem>
-          ))}
-        </LessonsList>
-        <LessonsBtnRight type="button">
-          <FcNext />
-        </LessonsBtnRight>
-      </LessonsWrap>
+          <LessonsWrap>
+            <LessonsList>
+              {course.lessons.map((lesson, idx) => (
+                <LessonsListItem key={lesson.id}>
+                  <LessonItem
+                    lesson={lesson}
+                    idx={idx}
+                    setActiveLessonIdx={setActiveLessonIdx}
+                    activeLessonIdx={activeLessonIdx}
+                  />
+                </LessonsListItem>
+              ))}
+            </LessonsList>
+          </LessonsWrap>
+        </>
+      )}
     </PageWrap>
   );
 };

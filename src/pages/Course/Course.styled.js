@@ -37,9 +37,7 @@ export const LessonsTitle = styled.p`
 export const LessonsWrap = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
   overflow: scroll;
-
   max-width: 348px;
 
   border-top: 1px solid ${p => p.theme.colors.logo};
@@ -57,66 +55,6 @@ export const LessonsWrap = styled.div`
 
   @media (min-width: ${p => p.theme.screens.large}) {
     max-width: 1680px;
-  }
-`;
-
-export const LessonsBtnLeft = styled.button`
-  position: absolute;
-  top: 10px;
-  left: 0;
-  height: calc(100% - 20px);
-  z-index: 10;
-
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  font-family: inherit;
-  border: none;
-  cursor: pointer;
-  background-color: rgba(82, 246, 7, 0.5);
-
-  border: 1px solid ${p => p.theme.colors.border};
-  border-radius: ${p => p.theme.radii.badge};
-  transition: ${p => p.theme.transitions.backgroundColor};
-
-  svg {
-    width: ${p => p.theme.iconSizes.s};
-    height: ${p => p.theme.iconSizes.s};
-  }
-
-  :hover {
-    background-color: rgba(246, 7, 236, 0.5);
-  }
-`;
-
-export const LessonsBtnRight = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 0;
-  height: calc(100% - 20px);
-  z-index: 10;
-
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  font-family: inherit;
-  border: none;
-  cursor: pointer;
-  background-color: rgba(82, 246, 7, 0.5);
-
-  border: 1px solid ${p => p.theme.colors.border};
-  border-radius: ${p => p.theme.radii.badge};
-  transition: ${p => p.theme.transitions.backgroundColor};
-
-  svg {
-    width: ${p => p.theme.iconSizes.s};
-    height: ${p => p.theme.iconSizes.s};
-  }
-
-  :hover {
-    background-color: rgba(246, 7, 236, 0.5);
   }
 `;
 

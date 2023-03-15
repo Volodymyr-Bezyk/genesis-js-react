@@ -6,6 +6,10 @@ export const LessonWrap = styled.div`
 
 export const LessonVideoWrap = styled.div`
   position: relative;
+  transition: ${p => p.theme.transitions.borderColor};
+  border: 3px solid
+    ${p =>
+      p.current ? p.theme.colors.primaryIcon : p.theme.colors.transparent};
 `;
 
 export const AvailableLesson = styled.video`
@@ -61,15 +65,15 @@ export const PlayBtn = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: 40px;
-  height: 40px;
+  width: 90%;
+  height: 90%;
 
   font-family: inherit;
   border: none;
+  outline: none;
   cursor: pointer;
-  background-color: rgba(246, 231, 7, 0.5);
+  background-color: rgba(246, 231, 7, 0.2);
 
-  border: 1px solid ${p => p.theme.colors.border};
   border-radius: ${p => p.theme.radii.badge};
   transition: ${p => p.theme.transitions.backgroundColor};
 
@@ -77,11 +81,16 @@ export const PlayBtn = styled.button`
     width: ${p => p.theme.iconSizes.s};
     height: ${p => p.theme.iconSizes.s};
     color: rgba(246, 7, 22, 0.7);
+    transition: ${p => p.theme.transitions.color};
+  }
+
+  :hover {
+    svg {
+      color: rgba(57, 246, 7, 0.85);
+    }
   }
 
   @media (min-width: ${p => p.theme.screens.tablet}) {
-    width: 50px;
-    height: 50px;
     svg {
       width: ${p => p.theme.iconSizes.sm};
       height: ${p => p.theme.iconSizes.sm};
@@ -89,11 +98,9 @@ export const PlayBtn = styled.button`
   }
 
   @media (min-width: ${p => p.theme.screens.desktop}) {
-    width: 60px;
-    height: 60px;
     svg {
-      width: ${p => p.theme.iconSizes.m};
-      height: ${p => p.theme.iconSizes.m};
+      width: ${p => p.theme.iconSizes.xl};
+      height: ${p => p.theme.iconSizes.xl};
     }
   }
 `;
