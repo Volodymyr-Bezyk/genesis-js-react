@@ -11,8 +11,8 @@ import {
 } from './LessonItem.styled';
 
 const LessonItem = ({ lesson, idx, setActiveLessonIdx, activeLessonIdx }) => {
-  const { id, order, previewImageLink, duration, link, status, title } = lesson;
-
+  const { status, title } = lesson;
+  //   id, order, previewImageLink, duration, link,
   //   console.log('link', `${previewImageLink}/${order}.webp`);
   return (
     <>
