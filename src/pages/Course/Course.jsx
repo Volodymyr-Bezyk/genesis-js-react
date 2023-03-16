@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import Hls from 'hls.js';
 import { BsStarFill } from 'react-icons/bs';
 import { getOneCourseById } from 'utils/getOneCourseById';
-import axios from 'axios';
-import { setAuthHeader } from 'utils/setAndCleanHeaders';
 
 import PageWrap from 'components/PageWrap';
 import PageTitle from 'components/PageTitle';
@@ -31,6 +29,7 @@ const Course = () => {
   const [activeLessonIdx, setActiveLessonIdx] = useState(0);
   const videoRef = useRef();
   const hls = useRef(new Hls());
+  const testVideo = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
   useEffect(() => {
     const controller = new AbortController();
@@ -38,15 +37,12 @@ const Course = () => {
     const getCourse = async () => {
       try {
         setLoading(true);
-        // TODO: Коду із отриманням токена тут бути не повинно,
-        // оскільки його ми отримуємо після реєстрації або логіну, просто не хочу змушувати Вас реєструватися
-        // const {
-        //   data: { token },
-        // } = await axios.get('/auth/anonymous?platform=subscriptions');
-        // setAuthHeader(token);
 
         const courseInfo = await getOneCourseById(controller, courseId);
         setCourse(courseInfo);
+        console.log('videoRef', videoRef);
+        hls.current.loadSource(courseInfo.lessons[0].link ?? testVideo);
+        hls.current.attachMedia(videoRef.current);
         setLoading(false);
         return courseInfo;
       } catch (error) {
@@ -61,8 +57,7 @@ const Course = () => {
     };
   }, [courseId]);
 
-  if (course) {
-    const testVideo = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+  if (course && activeLessonIdx !== 0) {
     hls.current.loadSource(course.lessons[activeLessonIdx].link ?? testVideo);
     hls.current.attachMedia(videoRef.current);
   }
