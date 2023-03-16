@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import Hls from 'hls.js';
 import { BsStarFill } from 'react-icons/bs';
 import { getOneCourseById } from 'utils/getOneCourseById';
+import axios from 'axios';
+import { setAuthHeader } from 'utils/setAndCleanHeaders';
 
 import PageWrap from 'components/PageWrap';
 import PageTitle from 'components/PageTitle';
@@ -39,6 +41,13 @@ const Course = () => {
     const getCourse = async () => {
       try {
         setLoading(true);
+        // TODO: Коду із отриманням токена тут бути не повинно,
+        // оскільки його ми отримуємо після реєстрації або логіну, просто не хочу змушувати Вас реєструватися
+        const {
+          data: { token },
+        } = await axios.get('/auth/anonymous?platform=subscriptions');
+        setAuthHeader(token);
+
         const courseInfo = await getOneCourseById(controller, courseId);
         setCourse(courseInfo);
         setLoading(false);
