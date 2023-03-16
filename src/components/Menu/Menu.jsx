@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { RxModulzLogo } from 'react-icons/rx';
 import { BiMenuAltRight } from 'react-icons/bi';
@@ -7,6 +8,7 @@ import { SiGnuprivacyguard } from 'react-icons/si';
 import { RiLoginBoxFill, RiLogoutCircleRFill } from 'react-icons/ri';
 import { ImStatsBars } from 'react-icons/im';
 import { IoMdClose } from 'react-icons/io';
+import { logout } from 'redux/auth/operations';
 
 import Box from 'components/Box';
 import MenuLink from 'components/MenuLink';
@@ -26,8 +28,12 @@ import {
 } from './Menu.styled';
 
 const Menu = () => {
+  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
+  const handleLogout = e => {
+    dispatch(logout());
+  };
   return (
     <MenuWrap>
       <StickyWrap>
@@ -66,7 +72,7 @@ const Menu = () => {
           <LogoutBtnWrap>
             <LogoutBtn type="button">
               <RiLogoutCircleRFill />
-              <LogoutBtnText>Logout</LogoutBtnText>
+              <LogoutBtnText onClick={handleLogout}>Logout</LogoutBtnText>
             </LogoutBtn>
           </LogoutBtnWrap>
         </NavWrap>

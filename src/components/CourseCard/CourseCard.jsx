@@ -32,11 +32,10 @@ const CourseCard = ({ course }) => {
   const hls = useRef(new Hls());
   const test = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
-  // console.log('course', id, courseVideoPreview?.link);
-
   useEffect(() => {
-    hls.current.loadSource(courseVideoPreview?.link ?? test);
-    hls.current.attachMedia(videoRef.current);
+    // TODO: uncomment code below
+    // hls.current.loadSource(courseVideoPreview?.link ?? test);
+    // hls.current.attachMedia(videoRef.current);
   }, [courseVideoPreview?.link]);
 
   return (
@@ -60,7 +59,7 @@ const CourseCard = ({ course }) => {
           </LessonsRatingItem>
           <LessonsRatingItem>
             <LessonsRatingValue>
-              {Math.round(+duration / 60)}
+              {Math.round(+duration / 3600)}
             </LessonsRatingValue>
             <LessonsRatingDesc>Hours</LessonsRatingDesc>
           </LessonsRatingItem>

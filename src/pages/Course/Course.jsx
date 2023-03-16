@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Hls from 'hls.js';
+import { BsStarFill } from 'react-icons/bs';
 import { getOneCourseById } from 'utils/getOneCourseById';
 
 import PageWrap from 'components/PageWrap';
 import PageTitle from 'components/PageTitle';
 import LessonItem from 'components/LessonItem';
+import Box from 'components/Box';
+import { dateFormatter } from 'utils/dateFormatter';
+import { selectToken } from 'redux/selectors';
 
 import {
   VideoWrap,
@@ -15,9 +20,11 @@ import {
   LessonsWrap,
   LessonsList,
   LessonsListItem,
+  RatingWrap,
 } from './Course.styled';
 
 const Course = () => {
+  const token = useSelector(selectToken);
   const { courseId } = useParams();
   const [isLoading, setLoading] = useState(false);
   const [, setError] = useState(null);
@@ -49,10 +56,8 @@ const Course = () => {
   }, [courseId]);
 
   if (course) {
-    // console.log('INSIDE videoRef.current', videoRef.current);
-    // console.log('activeLessonIdx', activeLessonIdx);
-    // console.log('link', course.lessons[activeLessonIdx].link);
-    hls.current.loadSource(course.lessons[activeLessonIdx].link);
+    const testVideo = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+    hls.current.loadSource(course.lessons[activeLessonIdx].link ?? testVideo);
     hls.current.attachMedia(videoRef.current);
   }
 
@@ -60,7 +65,33 @@ const Course = () => {
 
   return (
     <PageWrap>
-      {course?.title && <PageTitle title={course.title} />}
+      {course?.title && (
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <PageTitle title={course.title} />
+
+          {course.rating && (
+            <RatingWrap stars={Math.round(course.rating)}>
+              <LessonsTitle>Rating:</LessonsTitle>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <BsStarFill />
+                <BsStarFill />
+                <BsStarFill />
+                <BsStarFill />
+                <BsStarFill />
+              </Box>
+            </RatingWrap>
+          )}
+          {course.launchDate && (
+            <LessonsTitle>
+              Added: {dateFormatter(course.launchDate)}
+            </LessonsTitle>
+          )}
+        </Box>
+      )}
       <VideoWrap>
         <Video ref={videoRef} controls preload="auto"></Video>
       </VideoWrap>

@@ -1,6 +1,7 @@
 import { FaLock } from 'react-icons/fa';
 import { GoPlay } from 'react-icons/go';
 import { ImCheckboxChecked } from 'react-icons/im';
+import Box from 'components/Box';
 
 import {
   LessonWrap,
@@ -8,22 +9,21 @@ import {
   AvailableLesson,
   LessonTitle,
   PlayBtn,
+  LessonDuration,
 } from './LessonItem.styled';
 
 const LessonItem = ({ lesson, idx, setActiveLessonIdx, activeLessonIdx }) => {
-  const { status, title } = lesson;
-  //   id, order, previewImageLink, duration, link,
-  //   console.log('link', `${previewImageLink}/${order}.webp`);
+  const { status, title, previewImageLink, order, duration } = lesson;
+  //   id,link
+  // TODO:uncomment poster in Lesson
+
   return (
     <>
       <LessonWrap>
         <LessonVideoWrap current={activeLessonIdx === idx}>
-          <AvailableLesson>
-            {/* <source
-              src="http://techslides.com/demos/sample-videos/small.webm"
-              type="video/webm"
-            /> */}
-          </AvailableLesson>
+          <AvailableLesson
+          // poster={`${previewImageLink}/${order}.webp`}
+          ></AvailableLesson>
           <PlayBtn
             type="button"
             disabled={status === 'locked'}
@@ -36,7 +36,10 @@ const LessonItem = ({ lesson, idx, setActiveLessonIdx, activeLessonIdx }) => {
             )}
           </PlayBtn>
         </LessonVideoWrap>
-        <LessonTitle>{title}</LessonTitle>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <LessonTitle>{title}</LessonTitle>
+          <LessonDuration>{Math.round(+duration / 60)} m</LessonDuration>
+        </Box>
       </LessonWrap>
     </>
   );

@@ -37,21 +37,21 @@ export const LessonTitle = styled.p`
   line-height: 1.17;
   color: ${p => p.theme.colors.primaryLink};
 
-  max-width: 200px;
+  max-width: 160px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 
   @media (min-width: ${p => p.theme.screens.tablet}) {
-    max-width: 250px;
+    max-width: 200px;
   }
 
   @media (min-width: ${p => p.theme.screens.desktop}) {
-    max-width: 300px;
+    max-width: 250px;
   }
 
   @media (min-width: ${p => p.theme.screens.large}) {
-    max-width: 350px;
+    max-width: 260px;
   }
 `;
 
@@ -65,8 +65,8 @@ export const PlayBtn = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
 
   font-family: inherit;
   border: none;
@@ -102,5 +102,16 @@ export const PlayBtn = styled.button`
       width: ${p => p.theme.iconSizes.xl};
       height: ${p => p.theme.iconSizes.xl};
     }
+  }
+`;
+
+export const LessonDuration = styled.p`
+  padding: ${p => p.theme.space[1]}px ${p => p.theme.space[1]}px;
+  font-weight: ${p => p.theme.fontWeights.bold};
+  font-size: ${p => p.theme.fontSizes[4]}px;
+  color: ${p => p.theme.colors.primaryLink};
+
+  @media (min-width: ${p => p.theme.screens.tablet}) {
+    display: block;
   }
 `;

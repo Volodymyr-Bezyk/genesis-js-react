@@ -70,3 +70,24 @@ export const LessonsListItem = styled.li`
   border-radius: ${p => p.theme.radii.badge};
   overflow: hidden;
 `;
+
+export const RatingWrap = styled.div`
+  display: none;
+
+  @media (min-width: ${p => p.theme.screens.tablet}) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: ${p => p.theme.iconSizes.s};
+      height: ${p => p.theme.iconSizes.s};
+      transition: ${p => p.theme.transitions.color};
+
+      :nth-child(-n + ${p => p.stars}) {
+        color: rgba(246, 7, 22, 0.7);
+      }
+    }
+  }
+`;

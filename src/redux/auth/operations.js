@@ -1,53 +1,89 @@
-// import { createAsyncThunk } from '@reduxjs/toolkit';
-// import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
+} from 'firebase/auth';
 
-// export const register = createAsyncThunk('auth/register', async (credentials, thunkAPI) => {
-//     try {
-//       const res = await axios.post('/users/signup', credentials);
-//       setAuthHeader(res.data.token);
-//       return res.data;
-//     } catch (e) {
-//     //   toast.error(`${e.message}. Please check your credentials and try again.`);
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   });
+import { auth } from '../../firebase/config';
+import { refreshUserData } from './authSlice';
+import { setAuthHeader, clearAuthHeader } from 'utils/setAndCleanHeaders';
 
-//   export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
-//     try {
-//       const res = await axios.post('/users/login', credentials);
-//       setAuthHeader(res.data.token);
-//       return res.data;
-//     } catch (e) {
-//     //   toast.error(`${e.message}. Please check your credentials and try again.`);
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   });
+axios.defaults.baseURL = 'https://api.wisey.app/api/v1';
 
-//   export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-//     try {
-//       await axios.post('/users/logout');
-//       clearAuthHeader();
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   });
+export const register = createAsyncThunk(
+  'user/register',
 
-// export const refreshUser = createAsyncThunk(
-//   'auth/refreshUser',
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistedToken = state.auth.token;
+  async ({ email: userEmail, password, name }, thunkApi) => {
+    try {
+      await createUserWithEmailAndPassword(auth, userEmail, password);
+      await updateProfile(auth.currentUser, {
+        displayName: name,
+      });
 
-//     if (persistedToken === null) {
-//       return thunkAPI.rejectWithValue('Unable to fetch user');
-//     }
+      const {
+        data: { token },
+      } = await axios.get('/auth/anonymous?platform=subscriptions');
+      setAuthHeader(token);
 
-//     try {
-//       setAuthHeader(persistedToken);
-//       const res = await axios.get('/users/current');
-//       return res.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+      const { displayName, email } = auth.currentUser;
+      return { user: { name: displayName, email }, token };
+    } catch (error) {
+      //   toast.error(`${e.message}. Please check your credentials and try again.`);
+      return thunkApi.rejectWithValue(error.code, error.message);
+    }
+  }
+);
+
+export const login = createAsyncThunk(
+  'user/login',
+  async ({ email: userEmail, password }, thunkApi) => {
+    try {
+      await signInWithEmailAndPassword(auth, userEmail, password);
+
+      const {
+        data: { token },
+      } = await axios.get('/auth/anonymous?platform=subscriptions');
+      setAuthHeader(token);
+
+      const { displayName, email } = auth.currentUser;
+      return { user: { name: displayName, email }, token };
+    } catch (error) {
+      //   toast.error(`${e.message}. Please check your credentials and try again.`);
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+export const logout = createAsyncThunk('user/logout', async (_, thunkApi) => {
+  try {
+    await auth.signOut();
+    clearAuthHeader();
+    return;
+  } catch (error) {
+    console.log(error.message);
+    return thunkApi.rejectWithValue(error.message);
+  }
+});
+
+export const changeUserStateTracker = () => async dispatch => {
+  onAuthStateChanged(auth, async user => {
+    if (user) {
+      const { displayName, email } = user;
+      const {
+        data: { token },
+      } = await axios.get('/auth/anonymous?platform=subscriptions');
+      setAuthHeader(token);
+
+      dispatch(refreshUserData({ user: { name: displayName, email }, token }));
+    } else {
+      dispatch(
+        refreshUserData({
+          user: { name: null, email: null },
+          token: null,
+        })
+      );
+    }
+  });
+};

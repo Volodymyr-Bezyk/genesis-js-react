@@ -33,6 +33,7 @@ const theme = {
   radii: {
     input: '8px',
     badge: '8px',
+    form: '15px',
   },
 
   screens: {

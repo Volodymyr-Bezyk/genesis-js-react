@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllCourses, fetchCourseById } from './operations';
+import { fetchAllCourses } from './operations';
 
 const coursesSlice = createSlice({
   name: 'courses',
@@ -21,18 +21,6 @@ const coursesSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(fetchAllCourses.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(fetchCourseById.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(fetchCourseById.fulfilled, (state, action) => {
-        state.selectedCourse = action.payload;
-        state.error = null;
-        state.isLoading = false;
-      })
-      .addCase(fetchCourseById.rejected, (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
       }),
