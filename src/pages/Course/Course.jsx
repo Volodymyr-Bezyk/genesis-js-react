@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Hls from 'hls.js';
@@ -13,7 +12,6 @@ import PageTitle from 'components/PageTitle';
 import LessonItem from 'components/LessonItem';
 import Box from 'components/Box';
 import { dateFormatter } from 'utils/dateFormatter';
-import { selectToken } from 'redux/selectors';
 
 import {
   VideoWrap,
@@ -26,7 +24,6 @@ import {
 } from './Course.styled';
 
 const Course = () => {
-  const token = useSelector(selectToken);
   const { courseId } = useParams();
   const [isLoading, setLoading] = useState(false);
   const [, setError] = useState(null);

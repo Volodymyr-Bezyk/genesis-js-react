@@ -33,9 +33,8 @@ const CourseCard = ({ course }) => {
   const test = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
   useEffect(() => {
-    // TODO: uncomment code below
-    // hls.current.loadSource(courseVideoPreview?.link ?? test);
-    // hls.current.attachMedia(videoRef.current);
+    hls.current.loadSource(courseVideoPreview?.link ?? test);
+    hls.current.attachMedia(videoRef.current);
   }, [courseVideoPreview?.link]);
 
   return (
@@ -47,6 +46,8 @@ const CourseCard = ({ course }) => {
           ref={videoRef}
           controls
           muted
+          preload="auto"
+          // autoPlay
         ></Video>
         <LessonsRatingList>
           <LessonsRatingItem>

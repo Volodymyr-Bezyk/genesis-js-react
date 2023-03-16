@@ -22,7 +22,7 @@ const LessonItem = ({ lesson, idx, setActiveLessonIdx, activeLessonIdx }) => {
       <LessonWrap>
         <LessonVideoWrap current={activeLessonIdx === idx}>
           <AvailableLesson
-          // poster={`${previewImageLink}/${order}.webp`}
+            poster={`${previewImageLink}/${order}.webp`}
           ></AvailableLesson>
           <PlayBtn
             type="button"
