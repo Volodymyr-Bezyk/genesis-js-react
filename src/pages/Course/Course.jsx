@@ -1,29 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
 import Hls from 'hls.js';
-import { BsStarFill } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
 
 import PageWrap from 'components/PageWrap';
-import PageTitle from 'components/PageTitle';
-import LessonItem from 'components/LessonItem';
-import Box from 'components/Box';
-import { dateFormatter } from 'utils/dateFormatter';
-import { useSelector } from 'react-redux';
-import { selectToken } from 'redux/selectors';
+import CourseMainInfo from 'components/CourseMainInfo';
+import Lessons from 'components/Lessons';
+
+import { selectToken, selectProgress } from 'redux/selectors';
 import { getOneCourseById } from 'utils/getOneCourseById';
 import { updateProgress } from 'redux/lessonProgress/lessonProgressSlice';
 
-import {
-  VideoWrap,
-  Video,
-  LessonsTitle,
-  LessonsWrap,
-  LessonsList,
-  LessonsListItem,
-  RatingWrap,
-} from './Course.styled';
+import { getCurrentTimeToVideo } from 'utils/getCurrentTimeToVideo';
+
+import { VideoWrap, Video } from './Course.styled';
 
 const Course = () => {
   const dispatch = useDispatch();
@@ -34,8 +25,13 @@ const Course = () => {
   const [activeLessonIdx, setActiveLessonIdx] = useState(0);
   const videoRef = useRef();
   const hls = useRef(new Hls());
-  const testVideo = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+
   const token = useSelector(selectToken);
+  const progress = useSelector(selectProgress);
+
+  // console.log('progress', course);
+
+  const testVideo = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
   useEffect(() => {
     const controller = new AbortController();
@@ -48,8 +44,20 @@ const Course = () => {
           courseId
         );
         setCourse(courseInfo);
-        hls.current.loadSource(courseInfo.lessons[0].link ?? testVideo);
-        hls.current.attachMedia(videoRef.current);
+
+        if (progress && videoRef.current) {
+          const currentTime = getCurrentTimeToVideo({
+            courseId,
+            lessonId: courseInfo.lessons[0].id,
+            progress,
+          });
+
+          hls.current.loadSource(courseInfo.lessons[0].link ?? testVideo);
+          hls.current.attachMedia(videoRef.current);
+          videoRef.current.currentTime = currentTime;
+          // videoRef.current.play();
+        }
+
         setLoading(false);
         return courseInfo;
       } catch (error) {
@@ -62,16 +70,23 @@ const Course = () => {
     return () => {
       controller.abort();
     };
-  }, [courseId, token]);
+  }, [courseId, progress, token]);
 
-  if (course && activeLessonIdx !== 0) {
+  if (course) {
+    // if (progress && videoRef.current) {
+    //   const currentTime = getCurrentTimeToVideo({
+    //     courseId,
+    //     lessonId: courseInfo.lessons[activeLessonIdx].id,
+    //     progress,
+    //   });
+
     hls.current.loadSource(course.lessons[activeLessonIdx].link ?? testVideo);
     hls.current.attachMedia(videoRef.current);
   }
 
   if (isLoading) return;
 
-  const handleLessonProgress = e => {
+  const handleSaveLessonProgress = e => {
     const { currentTime } = videoRef.current;
     dispatch(
       updateProgress({
@@ -79,72 +94,28 @@ const Course = () => {
         lessons: { [course.lessons[activeLessonIdx].id]: currentTime },
       })
     );
-
-    // console.log('payload', {
-    //   courseId,
-    //   lessons: { [course.lessons[activeLessonIdx].id]: currentTime },
-    // });
   };
 
+  if (!course) return;
+  const { title, launchDate, rating, lessons } = course;
   return (
     <PageWrap>
-      {course?.title && (
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <PageTitle title={course.title} />
+      <CourseMainInfo title={title} launchDate={launchDate} rating={rating} />
 
-          {course.rating && (
-            <RatingWrap stars={Math.round(course.rating)}>
-              <LessonsTitle>Rating:</LessonsTitle>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <BsStarFill />
-                <BsStarFill />
-                <BsStarFill />
-                <BsStarFill />
-                <BsStarFill />
-              </Box>
-            </RatingWrap>
-          )}
-          {course.launchDate && (
-            <LessonsTitle>
-              Added: {dateFormatter(course.launchDate)}
-            </LessonsTitle>
-          )}
-        </Box>
-      )}
       <VideoWrap>
         <Video
           ref={videoRef}
           controls
           preload="auto"
-          onTimeUpdate={handleLessonProgress}
+          onPause={handleSaveLessonProgress}
         ></Video>
       </VideoWrap>
-      {course && (
-        <>
-          <LessonsTitle>
-            Lessons in this course: {course.lessons.length}
-          </LessonsTitle>
 
-          <LessonsWrap>
-            <LessonsList>
-              {course.lessons.map((lesson, idx) => (
-                <LessonsListItem key={lesson.id}>
-                  <LessonItem
-                    lesson={lesson}
-                    idx={idx}
-                    setActiveLessonIdx={setActiveLessonIdx}
-                    activeLessonIdx={activeLessonIdx}
-                  />
-                </LessonsListItem>
-              ))}
-            </LessonsList>
-          </LessonsWrap>
-        </>
-      )}
+      <Lessons
+        setActiveLessonIdx={setActiveLessonIdx}
+        activeLessonIdx={activeLessonIdx}
+        lessons={lessons}
+      />
     </PageWrap>
   );
 };
