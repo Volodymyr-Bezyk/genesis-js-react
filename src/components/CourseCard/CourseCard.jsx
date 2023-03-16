@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Hls from 'hls.js';
 import SkillsBlock from 'components/SkillsBlock';
 
@@ -28,26 +28,30 @@ const CourseCard = ({ course }) => {
     meta: { courseVideoPreview, skills },
   } = course;
 
-  const videoRef = useRef();
+  const [isHovering, setIsHovering] = useState(false);
+
+  const videoRef = useRef(null);
   const hls = useRef(new Hls());
   const test = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
   useEffect(() => {
     hls.current.loadSource(courseVideoPreview?.link ?? test);
     hls.current.attachMedia(videoRef.current);
-  }, [courseVideoPreview?.link]);
+  }, [courseVideoPreview?.link, isHovering]);
 
   return (
     <CourseCardWrap>
       <CoursesTitle>{title}</CoursesTitle>
       <VideoLink to={`course/${id}`}>
         <Video
+          onTimeUpdate={() => console.log('time', videoRef.current.currentTime)}
           poster={previewImageLink + '/cover.webp'}
           ref={videoRef}
-          controls
           muted
           preload="auto"
-          // autoPlay
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          autoPlay={isHovering}
         ></Video>
         <LessonsRatingList>
           <LessonsRatingItem>

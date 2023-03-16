@@ -10,6 +10,8 @@ import PageTitle from 'components/PageTitle';
 import LessonItem from 'components/LessonItem';
 import Box from 'components/Box';
 import { dateFormatter } from 'utils/dateFormatter';
+import { useSelector } from 'react-redux';
+import { selectToken } from 'redux/selectors';
 
 import {
   VideoWrap,
@@ -30,15 +32,18 @@ const Course = () => {
   const videoRef = useRef();
   const hls = useRef(new Hls());
   const testVideo = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     const controller = new AbortController();
-
     const getCourse = async () => {
       try {
         setLoading(true);
 
-        const courseInfo = await getOneCourseById(controller, courseId);
+        const courseInfo = await getOneCourseById(
+          { token, controller },
+          courseId
+        );
         setCourse(courseInfo);
         console.log('videoRef', videoRef);
         hls.current.loadSource(courseInfo.lessons[0].link ?? testVideo);
@@ -55,7 +60,7 @@ const Course = () => {
     return () => {
       controller.abort();
     };
-  }, [courseId]);
+  }, [courseId, token]);
 
   if (course && activeLessonIdx !== 0) {
     hls.current.loadSource(course.lessons[activeLessonIdx].link ?? testVideo);

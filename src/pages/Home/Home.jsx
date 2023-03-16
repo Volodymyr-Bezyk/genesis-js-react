@@ -11,9 +11,11 @@ import PaginateCourses from 'components/PaginateCourses';
 import { selectFilter } from 'redux/selectors';
 
 import { CoursesList, CoursesItem } from './Home.styled';
+import { selectToken } from 'redux/selectors';
 
 const Home = () => {
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
   const courses = useSelector(selectFilteredCourses);
   const filter = useSelector(selectFilter);
 
@@ -24,13 +26,13 @@ const Home = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    dispatch(fetchAllCourses(controller));
+    dispatch(fetchAllCourses({ token, controller }));
     setItemOffset(0);
 
     return () => {
       controller.abort();
     };
-  }, [dispatch, filter]);
+  }, [dispatch, filter, token]);
 
   const handlePageClick = event => {
     const newOffset = (event.selected * 10) % courses.length;
