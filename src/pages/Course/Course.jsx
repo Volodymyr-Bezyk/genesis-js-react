@@ -40,10 +40,10 @@ const Course = () => {
         setLoading(true);
         // TODO: Коду із отриманням токена тут бути не повинно,
         // оскільки його ми отримуємо після реєстрації або логіну, просто не хочу змушувати Вас реєструватися
-        const {
-          data: { token },
-        } = await axios.get('/auth/anonymous?platform=subscriptions');
-        setAuthHeader(token);
+        // const {
+        //   data: { token },
+        // } = await axios.get('/auth/anonymous?platform=subscriptions');
+        // setAuthHeader(token);
 
         const courseInfo = await getOneCourseById(controller, courseId);
         setCourse(courseInfo);

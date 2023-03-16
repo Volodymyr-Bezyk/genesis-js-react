@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchAllCourses } from './operations';
+import { pendingReducer, rejectedReducer, successReducer } from './reducers';
 
 const coursesSlice = createSlice({
   name: 'courses',
@@ -11,19 +12,9 @@ const coursesSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-      .addCase(fetchAllCourses.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(fetchAllCourses.fulfilled, (state, action) => {
-        state.courses = action.payload;
-        state.error = null;
-        state.selectedCourse = null;
-        state.isLoading = false;
-      })
-      .addCase(fetchAllCourses.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isLoading = false;
-      }),
+      .addCase(fetchAllCourses.pending, pendingReducer)
+      .addCase(fetchAllCourses.fulfilled, successReducer)
+      .addCase(fetchAllCourses.rejected, rejectedReducer),
 });
 
 export const coursesReducer = coursesSlice.reducer;
