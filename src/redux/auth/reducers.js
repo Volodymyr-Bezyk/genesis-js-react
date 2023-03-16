@@ -23,4 +23,5 @@ export const logoutReducer = (state, action) => {
 export const refreshUserDataReducer = (state, action) => {
   state.user = action.payload.user;
   state.token = action.payload.token;
+  state.isLoggedIn = true;
 };

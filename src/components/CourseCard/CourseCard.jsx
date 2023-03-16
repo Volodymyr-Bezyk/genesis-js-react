@@ -29,7 +29,6 @@ const CourseCard = ({ course }) => {
   } = course;
 
   const [isHovering, setIsHovering] = useState(false);
-
   const videoRef = useRef(null);
   const hls = useRef(new Hls());
   const test = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
@@ -44,7 +43,6 @@ const CourseCard = ({ course }) => {
       <CoursesTitle>{title}</CoursesTitle>
       <VideoLink to={`course/${id}`}>
         <Video
-          onTimeUpdate={() => console.log('time', videoRef.current.currentTime)}
           poster={previewImageLink + '/cover.webp'}
           ref={videoRef}
           muted

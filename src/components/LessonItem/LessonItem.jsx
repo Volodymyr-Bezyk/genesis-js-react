@@ -14,15 +14,13 @@ import {
 
 const LessonItem = ({ lesson, idx, setActiveLessonIdx, activeLessonIdx }) => {
   const { status, title, previewImageLink, order, duration } = lesson;
-  //   id,link
-  // TODO:uncomment poster in Lesson
 
   return (
     <>
       <LessonWrap>
         <LessonVideoWrap current={activeLessonIdx === idx}>
           <AvailableLesson
-            poster={`${previewImageLink}/${order}.webp`}
+            poster={`${previewImageLink}/lesson-${order}.webp`}
           ></AvailableLesson>
           <PlayBtn
             type="button"

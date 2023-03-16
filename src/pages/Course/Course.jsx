@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Hls from 'hls.js';
 import { BsStarFill } from 'react-icons/bs';
-import { getOneCourseById } from 'utils/getOneCourseById';
+import { useDispatch } from 'react-redux';
 
 import PageWrap from 'components/PageWrap';
 import PageTitle from 'components/PageTitle';
@@ -12,6 +12,8 @@ import Box from 'components/Box';
 import { dateFormatter } from 'utils/dateFormatter';
 import { useSelector } from 'react-redux';
 import { selectToken } from 'redux/selectors';
+import { getOneCourseById } from 'utils/getOneCourseById';
+import { updateProgress } from 'redux/lessonProgress/lessonProgressSlice';
 
 import {
   VideoWrap,
@@ -24,6 +26,7 @@ import {
 } from './Course.styled';
 
 const Course = () => {
+  const dispatch = useDispatch();
   const { courseId } = useParams();
   const [isLoading, setLoading] = useState(false);
   const [, setError] = useState(null);
@@ -45,7 +48,6 @@ const Course = () => {
           courseId
         );
         setCourse(courseInfo);
-        console.log('videoRef', videoRef);
         hls.current.loadSource(courseInfo.lessons[0].link ?? testVideo);
         hls.current.attachMedia(videoRef.current);
         setLoading(false);
@@ -68,6 +70,21 @@ const Course = () => {
   }
 
   if (isLoading) return;
+
+  const handleLessonProgress = e => {
+    const { currentTime } = videoRef.current;
+    dispatch(
+      updateProgress({
+        courseId,
+        lessons: { [course.lessons[activeLessonIdx].id]: currentTime },
+      })
+    );
+
+    // console.log('payload', {
+    //   courseId,
+    //   lessons: { [course.lessons[activeLessonIdx].id]: currentTime },
+    // });
+  };
 
   return (
     <PageWrap>
@@ -99,7 +116,12 @@ const Course = () => {
         </Box>
       )}
       <VideoWrap>
-        <Video ref={videoRef} controls preload="auto"></Video>
+        <Video
+          ref={videoRef}
+          controls
+          preload="auto"
+          onTimeUpdate={handleLessonProgress}
+        ></Video>
       </VideoWrap>
       {course && (
         <>
