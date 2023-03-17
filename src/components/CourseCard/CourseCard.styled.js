@@ -24,6 +24,7 @@ export const Video = styled.video`
   width: 100%;
   height: 197px;
   object-fit: cover;
+  object-position: 1px 1px;
 
   @media (min-width: ${p => p.theme.screens.tablet}) {
     height: 300px;
