@@ -6,11 +6,16 @@ export const VideoWrap = styled.div`
   border-bottom: 1px solid ${p => p.theme.colors.border};
 `;
 
+export const PlayerWrap = styled.div`
+  position: relative;
+`;
+
 export const Video = styled.video`
   display: block;
   width: 100%;
-  height: 200px;
   object-fit: cover;
+
+  height: 200px;
 
   @media (min-width: ${p => p.theme.screens.tablet}) {
     height: 302px;

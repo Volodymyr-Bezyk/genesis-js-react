@@ -7,7 +7,7 @@ import { constants } from 'constants/constants';
 import { saveCoursesProgress } from 'utils/saveCoursesProgress';
 import PlayerHints from 'components/PlayerHints';
 
-import { VideoWrap, Video } from './MainVideoPlayer.styled';
+import { VideoWrap, Video, PlayerWrap } from './MainVideoPlayer.styled';
 
 const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx, time }) => {
   const [coursesProgress, setCoursesProgress] = useLocalStorage(
@@ -17,6 +17,7 @@ const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx, time }) => {
   const playbackRate = useRef(1);
   const videoRef = useRef(null);
   const hls = useRef(new Hls());
+
   const testVideo = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
   useEffect(() => {
@@ -62,12 +63,15 @@ const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx, time }) => {
   return (
     <VideoWrap onKeyDown={handleKeyDown}>
       <PlayerHints videoRef={videoRef} />
-      <Video
-        ref={videoRef}
-        controls
-        preload="auto"
-        onTimeUpdate={handleSaveLessonProgress}
-      ></Video>
+      <PlayerWrap>
+        <Video
+          ref={videoRef}
+          controls={true}
+          preload="none"
+          autoPlay={false}
+          onTimeUpdate={handleSaveLessonProgress}
+        />
+      </PlayerWrap>
     </VideoWrap>
   );
 };

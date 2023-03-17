@@ -36,6 +36,7 @@ const Menu = () => {
   const handleLogout = e => {
     dispatch(logout());
   };
+
   return (
     <MenuWrap>
       <StickyWrap>
@@ -62,9 +63,15 @@ const Menu = () => {
               title="Dashboard"
               icon={<ImStatsBars />}
               path="dashboard"
+              setShowMenu={setShowMenu}
             />
             {isLoggedIn && !isRefreshing && (
-              <MenuLink title="Courses" icon={<MdVideoLibrary />} path="/" />
+              <MenuLink
+                title="Courses"
+                icon={<MdVideoLibrary />}
+                path="/"
+                setShowMenu={setShowMenu}
+              />
             )}
 
             {!isLoggedIn && !isRefreshing && (
@@ -73,11 +80,13 @@ const Menu = () => {
                   title="Register"
                   icon={<SiGnuprivacyguard />}
                   path="register"
+                  setShowMenu={setShowMenu}
                 />
                 <MenuLink
                   title="Login"
                   icon={<RiLoginBoxFill />}
                   path="login"
+                  setShowMenu={setShowMenu}
                 />
               </>
             )}

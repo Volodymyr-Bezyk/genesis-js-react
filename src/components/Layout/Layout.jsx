@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { changeUserStateTracker } from 'redux/auth/operations';
+import PageSkeleton from 'components/PageSkeleton';
 
 import Container from 'components/Container';
 import Menu from 'components/Menu';
@@ -31,7 +32,7 @@ const Layout = () => {
               },
             }}
           />
-          <Suspense fallback={null}>
+          <Suspense fallback={<PageSkeleton />}>
             <Outlet />
           </Suspense>
         </MainContent>
