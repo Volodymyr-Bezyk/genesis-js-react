@@ -61,7 +61,7 @@ const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx, time }) => {
 
   return (
     <VideoWrap onKeyDown={handleKeyDown}>
-      <PlayerHints />
+      <PlayerHints videoRef={videoRef} />
       <Video
         ref={videoRef}
         controls
