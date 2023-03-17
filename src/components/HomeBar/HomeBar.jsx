@@ -4,7 +4,7 @@ import { BsSearch } from 'react-icons/bs';
 import PageTitle from 'components/PageTitle';
 
 import { setFilterValue } from 'redux/filter/filterSlice';
-import { selectFilter } from 'redux/selectors';
+import { selectFilter, selectUser } from 'redux/selectors';
 
 import {
   HomeBarWrap,
@@ -19,6 +19,7 @@ import {
 const HomeBar = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
+  const user = useSelector(selectUser);
 
   const handleInput = e => {
     dispatch(setFilterValue(e.target.value.trim()));
@@ -39,8 +40,8 @@ const HomeBar = () => {
         </SearchIcon>
       </SearchLabel>
       <UserInfo>
-        <UserName>Asfak Mahmud</UserName>
-        <UserEmail>asfakmahmudbd@gmaill.com</UserEmail>
+        <UserName>Hello, {user.name ?? 'unknown'}</UserName>
+        <UserEmail>{user.email ?? 'unknown'}</UserEmail>
       </UserInfo>
     </HomeBarWrap>
   );

@@ -11,12 +11,6 @@ const PlayerHints = ({ videoRef }) => {
     videoRef.current !== null && document.pictureInPictureEnabled;
 
   const handlePiP = e => {
-    // console.log(
-    //   'document.pictureInPictureEnabled',
-    //   document.pictureInPictureEnabled
-    // );
-    // console.log('videoRef.current !== null', videoRef.current !== null);
-    // console.log('videoRef', videoRef);
     if (!document.pictureInPictureElement) {
       videoRef.current.requestPictureInPicture();
     } else {
