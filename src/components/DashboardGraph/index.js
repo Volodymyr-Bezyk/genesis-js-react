@@ -1,1 +1,1 @@
-export default from './DashboardGraph.jsx';
+export { default } from './DashboardGraph.jsx';
