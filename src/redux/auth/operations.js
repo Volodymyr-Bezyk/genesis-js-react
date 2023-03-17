@@ -76,12 +76,21 @@ export const changeUserStateTracker = () => async dispatch => {
       } = await axios.get('/auth/anonymous?platform=subscriptions');
       setAuthHeader(token);
 
-      dispatch(refreshUserData({ user: { name: displayName, email }, token }));
+      dispatch(
+        refreshUserData({
+          user: { name: displayName, email },
+          token,
+          isLoggedIn: true,
+          isRefreshing: false,
+        })
+      );
     } else {
       dispatch(
         refreshUserData({
           user: { name: null, email: null },
           token: null,
+          isLoggedIn: false,
+          isRefreshing: false,
         })
       );
     }

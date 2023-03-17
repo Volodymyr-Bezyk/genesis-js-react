@@ -19,6 +19,7 @@ const Course = () => {
   const [course, setCourse] = useState(null);
   const [idx, time] = useLocalStorageOneTime(constants.LS_KEY, courseId);
   const [activeLessonIdx, setActiveLessonIdx] = useState(idx);
+  const [currentTime, setCurrentTime] = useState(time);
   const token = useSelector(selectToken);
 
   useEffect(() => {
@@ -47,6 +48,11 @@ const Course = () => {
     };
   }, [courseId, token]);
 
+  const handleLessonChange = idx => {
+    setActiveLessonIdx(idx);
+    setCurrentTime(0);
+  };
+
   if (!course || isLoading) return;
   const { id, title, launchDate, rating, lessons } = course;
 
@@ -56,11 +62,11 @@ const Course = () => {
       <MainVideoPlayer
         lessons={lessons}
         activeLessonIdx={activeLessonIdx}
-        time={time}
+        time={currentTime}
         courseId={id}
       />
       <Lessons
-        setActiveLessonIdx={setActiveLessonIdx}
+        setActiveLessonIdx={handleLessonChange}
         activeLessonIdx={activeLessonIdx}
         lessons={lessons}
       />

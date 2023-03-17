@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RxModulzLogo } from 'react-icons/rx';
 import { BiMenuAltRight } from 'react-icons/bi';
@@ -9,6 +9,7 @@ import { RiLoginBoxFill, RiLogoutCircleRFill } from 'react-icons/ri';
 import { ImStatsBars } from 'react-icons/im';
 import { IoMdClose } from 'react-icons/io';
 import { logout } from 'redux/auth/operations';
+import { selectAuth } from 'redux/selectors';
 
 import Box from 'components/Box';
 import MenuLink from 'components/MenuLink';
@@ -30,6 +31,7 @@ import {
 const Menu = () => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const { isLoggedIn, isRefreshing } = useSelector(selectAuth);
 
   const handleLogout = e => {
     dispatch(logout());
@@ -61,20 +63,33 @@ const Menu = () => {
               icon={<ImStatsBars />}
               path="dashboard"
             />
-            <MenuLink title="Courses" icon={<MdVideoLibrary />} path="/" />
-            <MenuLink
-              title="Register"
-              icon={<SiGnuprivacyguard />}
-              path="register"
-            />
-            <MenuLink title="Login" icon={<RiLoginBoxFill />} path="login" />
+            {isLoggedIn && !isRefreshing && (
+              <MenuLink title="Courses" icon={<MdVideoLibrary />} path="/" />
+            )}
+
+            {!isLoggedIn && !isRefreshing && (
+              <>
+                <MenuLink
+                  title="Register"
+                  icon={<SiGnuprivacyguard />}
+                  path="register"
+                />
+                <MenuLink
+                  title="Login"
+                  icon={<RiLoginBoxFill />}
+                  path="login"
+                />
+              </>
+            )}
           </Nav>
-          <LogoutBtnWrap>
-            <LogoutBtn type="button">
-              <RiLogoutCircleRFill />
-              <LogoutBtnText onClick={handleLogout}>Logout</LogoutBtnText>
-            </LogoutBtn>
-          </LogoutBtnWrap>
+          {isLoggedIn && !isRefreshing && (
+            <LogoutBtnWrap>
+              <LogoutBtn type="button">
+                <RiLogoutCircleRFill />
+                <LogoutBtnText onClick={handleLogout}>Logout</LogoutBtnText>
+              </LogoutBtn>
+            </LogoutBtnWrap>
+          )}
         </NavWrap>
       </StickyWrap>
     </MenuWrap>

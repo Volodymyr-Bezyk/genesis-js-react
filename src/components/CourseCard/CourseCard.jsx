@@ -35,6 +35,7 @@ const CourseCard = ({ course }) => {
 
   useEffect(() => {
     hls.current.loadSource(courseVideoPreview?.link ?? test);
+
     hls.current.attachMedia(videoRef.current);
   }, [courseVideoPreview?.link, isHovering]);
 

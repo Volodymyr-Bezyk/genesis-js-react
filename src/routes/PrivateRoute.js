@@ -15,3 +15,5 @@ export default PrivateRoute;
 //   redirectTo: PropTypes.string.isRequired,
 //   component: PropTypes.object.isRequired,
 // };
+
+// && !user.email;

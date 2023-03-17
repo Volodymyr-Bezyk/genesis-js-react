@@ -15,7 +15,7 @@ const initialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
-  isRefreshing: false,
+  isRefreshing: true,
   isLoading: false,
 };
 
@@ -37,4 +37,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { refreshUserData } = authSlice.actions;
+export const { refreshUserData, setRefresh } = authSlice.actions;
