@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -29,9 +30,10 @@ export const register = createAsyncThunk(
       setAuthHeader(token);
 
       const { displayName, email } = auth.currentUser;
+      toast.success(`Congratulation! You logged in`);
       return { user: { name: displayName, email }, token };
     } catch (error) {
-      //   toast.error(`${e.message}. Please check your credentials and try again.`);
+      toast.error(` Please check your credentials and try again.`);
       return thunkApi.rejectWithValue(error.code, error.message);
     }
   }
@@ -49,9 +51,10 @@ export const login = createAsyncThunk(
       setAuthHeader(token);
 
       const { displayName, email } = auth.currentUser;
+      toast.success(`Congratulation! You logged in`);
       return { user: { name: displayName, email }, token };
     } catch (error) {
-      //   toast.error(`${e.message}. Please check your credentials and try again.`);
+      toast.error(` Please check your credentials and try again.`);
       return thunkApi.rejectWithValue(error.message);
     }
   }
