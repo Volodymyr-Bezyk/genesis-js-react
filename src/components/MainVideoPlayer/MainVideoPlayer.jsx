@@ -1,12 +1,15 @@
 import Hls from 'hls.js';
 import { useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateProgress } from 'redux/lessonProgress/lessonProgressSlice';
 import { VideoWrap, Video } from './MainVideoPlayer.styled';
-// import { getCurrentTimeToVideo } from 'utils/getCurrentTimeToVideo';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import { constants } from 'constants/constants';
+import { saveCoursesProgress } from 'utils/saveCoursesProgress';
 
-const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx }) => {
-  const dispatch = useDispatch();
+const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx, time }) => {
+  const [coursesProgress, setCoursesProgress] = useLocalStorage(
+    constants.LS_KEY
+  );
+
   const videoRef = useRef();
   const hls = useRef(new Hls());
   const testVideo = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
@@ -14,16 +17,20 @@ const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx }) => {
   useEffect(() => {
     hls.current.loadSource(lessons[activeLessonIdx].link ?? testVideo);
     hls.current.attachMedia(videoRef.current);
-  }, [activeLessonIdx, lessons]);
+    videoRef.current.currentTime = time;
+  }, [activeLessonIdx, lessons, time]);
 
   const handleSaveLessonProgress = e => {
     const { currentTime } = videoRef.current;
-    dispatch(
-      updateProgress({
-        courseId,
-        lessons: { [lessons[activeLessonIdx].id]: currentTime },
-      })
-    );
+    const currentCourse = {
+      courseId,
+      lesson: {
+        currentLesson: lessons[activeLessonIdx].id,
+        activeLessonIdx,
+        currentTime,
+      },
+    };
+    saveCoursesProgress(coursesProgress, currentCourse, setCoursesProgress);
   };
 
   return (
@@ -32,7 +39,7 @@ const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx }) => {
         ref={videoRef}
         controls
         preload="auto"
-        onPause={handleSaveLessonProgress}
+        onTimeUpdate={handleSaveLessonProgress}
       ></Video>
     </VideoWrap>
   );
@@ -41,14 +48,6 @@ const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx }) => {
 export default MainVideoPlayer;
 
 // if (progress && videoRef.current) {
-//   const currentTime = getCurrentTimeToVideo({
-//     courseId,
-//     lessonId: courseInfo.lessons[0].id,
-//     progress,
-//   });
 
-//   hls.current.loadSource(courseInfo.lessons[0].link ?? testVideo);
-//   hls.current.attachMedia(videoRef.current);
-//   videoRef.current.currentTime = currentTime;
 //   // videoRef.current.play();
 // }
