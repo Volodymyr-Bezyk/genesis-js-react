@@ -80,7 +80,6 @@ export const RegisterBtn = styled.button`
   border: 2px solid ${p => p.theme.colors.logo};
   outline: none;
   cursor: pointer;
-  background-color: rgba(246, 231, 7, 0.2);
 
   font-weight: ${p => p.theme.fontWeights.medium};
   font-size: ${p => p.theme.fontSizes[3]}px;
@@ -92,7 +91,7 @@ export const RegisterBtn = styled.button`
 
   :hover {
     color: ${p => p.theme.colors.primaryIcon};
-    background-color: ${p => p.theme.colors.hover};
+    background-color: rgba(246, 231, 7, 0.2);
   }
 `;
 export const GoToLoginLink = styled(Link)`
