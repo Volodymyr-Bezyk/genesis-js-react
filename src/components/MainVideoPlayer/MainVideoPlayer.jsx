@@ -28,16 +28,18 @@ const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx, time }) => {
   }, [activeLessonIdx, lessons, time]);
 
   const handleSaveLessonProgress = e => {
-    const { currentTime } = videoRef.current;
-    const currentCourse = {
-      courseId,
-      lesson: {
-        currentLesson: lessons[activeLessonIdx].id,
-        activeLessonIdx,
-        currentTime,
-      },
-    };
-    saveCoursesProgress(coursesProgress, currentCourse, setCoursesProgress);
+    if (videoRef) {
+      const { currentTime } = videoRef.current;
+      const currentCourse = {
+        courseId,
+        lesson: {
+          currentLesson: lessons[activeLessonIdx].id,
+          activeLessonIdx,
+          currentTime,
+        },
+      };
+      saveCoursesProgress(coursesProgress, currentCourse, setCoursesProgress);
+    }
   };
 
   const handleKeyDown = async e => {
