@@ -43,7 +43,7 @@ const Login = () => {
             <FormInput
               onInput={e => setEmail(e.target.value)}
               type="email"
-              placeholder="jjames@gmail.com"
+              placeholder="replex@gmail.com"
               name="email"
               value={email}
               required
