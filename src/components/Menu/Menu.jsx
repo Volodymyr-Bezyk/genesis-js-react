@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 
 import { RxModulzLogo } from 'react-icons/rx';
 import { BiMenuAltRight } from 'react-icons/bi';
@@ -9,7 +10,7 @@ import { RiLoginBoxFill, RiLogoutCircleRFill } from 'react-icons/ri';
 import { ImStatsBars } from 'react-icons/im';
 import { IoMdClose } from 'react-icons/io';
 import { logout } from 'redux/auth/operations';
-import { selectAuth } from 'redux/selectors';
+import { selectAuth, selectIsLoadingAuth } from 'redux/selectors';
 
 import Box from 'components/Box';
 import MenuLink from 'components/MenuLink';
@@ -32,6 +33,7 @@ const Menu = () => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { isLoggedIn, isRefreshing } = useSelector(selectAuth);
+  const isLoading = useSelector(selectIsLoadingAuth);
 
   const handleLogout = e => {
     dispatch(logout());
@@ -96,6 +98,13 @@ const Menu = () => {
               <LogoutBtn type="button">
                 <RiLogoutCircleRFill />
                 <LogoutBtnText onClick={handleLogout}>Logout</LogoutBtnText>
+                {isLoading && (
+                  <ClipLoader
+                    size={20}
+                    color="#0075FF"
+                    cssOverride={{ marginLeft: '10px' }}
+                  />
+                )}
               </LogoutBtn>
             </LogoutBtnWrap>
           )}

@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 import PageWrap from 'components/PageWrap';
 import PageTitle from 'components/PageTitle';
 
 import { register } from 'redux/auth/operations';
+import { selectIsLoadingAuth } from 'redux/selectors';
 
 import {
   RegisterWrap,
@@ -13,11 +15,13 @@ import {
   FormLabelText,
   FormInput,
   RegisterBtn,
+  RegisterBtnText,
   GoToLoginLink,
 } from './Register.styled';
 
 const Register = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoadingAuth);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -69,7 +73,16 @@ const Register = () => {
             />
           </FormLabel>
 
-          <RegisterBtn type="submit">Register</RegisterBtn>
+          <RegisterBtn type="submit">
+            <RegisterBtnText>Register</RegisterBtnText>
+            {isLoading && (
+              <ClipLoader
+                size={20}
+                color="#0075FF"
+                cssOverride={{ marginLeft: '10px' }}
+              />
+            )}
+          </RegisterBtn>
           <GoToLoginLink to="/login">Already have account?</GoToLoginLink>
         </RegisterForm>
       </RegisterWrap>

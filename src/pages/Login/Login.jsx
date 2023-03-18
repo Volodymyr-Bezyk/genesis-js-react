@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 import PageWrap from 'components/PageWrap';
 import PageTitle from 'components/PageTitle';
 
 import { login } from 'redux/auth/operations';
+import { selectIsLoadingAuth } from 'redux/selectors';
 
 import {
   LoginWrap,
@@ -13,11 +15,13 @@ import {
   FormLabelText,
   FormInput,
   LoginBtn,
+  LoginBtnText,
   GoToLoginLink,
 } from './Login.styled';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoadingAuth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -57,7 +61,16 @@ const Login = () => {
             />
           </FormLabel>
 
-          <LoginBtn type="submit">Login</LoginBtn>
+          <LoginBtn type="submit">
+            <LoginBtnText>Login</LoginBtnText>
+            {isLoading && (
+              <ClipLoader
+                size={20}
+                color="#0075FF"
+                cssOverride={{ marginLeft: '10px' }}
+              />
+            )}
+          </LoginBtn>
           <GoToLoginLink to="/register">
             No account? Please signup
           </GoToLoginLink>

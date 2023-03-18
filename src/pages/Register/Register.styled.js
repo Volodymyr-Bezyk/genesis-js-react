@@ -86,14 +86,27 @@ export const RegisterBtn = styled.button`
   line-height: 1.14;
   color: ${p => p.theme.colors.title};
 
-  transition: ${p => p.theme.transitions.color},
-    ${p => p.theme.transitions.backgroundColor};
+  transition: ${p => p.theme.transitions.backgroundColor};
 
   :hover {
-    color: ${p => p.theme.colors.primaryIcon};
+    span {
+      color: ${p => p.theme.colors.primaryIcon};
+    }
+
     background-color: rgba(246, 231, 7, 0.2);
   }
 `;
+
+export const RegisterBtnText = styled.span`
+  display: inline-block;
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes[3]}px;
+  line-height: 1.14;
+  color: ${p => p.theme.colors.title};
+
+  transition: ${p => p.theme.transitions.color};
+`;
+
 export const GoToLoginLink = styled(Link)`
   padding: ${p => p.theme.space[2]}px ${p => p.theme.space[4]}px;
   font-weight: ${p => p.theme.fontWeights.medium};
