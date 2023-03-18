@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
-import { MenuLink, MenuLinkText } from './MenuLink.styled';
+import { MenuNavLink, MenuLinkText } from './MenuLink.styled';
 
-const MobileMenuLink = ({ title, icon, path, setShowMenu }) => {
+const MenuLink = ({ title, icon, path, setShowMenu }) => {
   return (
-    <MenuLink to={path} end onClick={e => setShowMenu(false)}>
+    <MenuNavLink to={path} end onClick={e => setShowMenu(false)}>
       {icon}
       <MenuLinkText>{title}</MenuLinkText>
-    </MenuLink>
+    </MenuNavLink>
   );
 };
 
-export default MobileMenuLink;
+export default MenuLink;
 
-MobileMenuLink.propTypes = {
+MenuLink.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.object,
   path: PropTypes.string.isRequired,
