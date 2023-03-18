@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { FaLock } from 'react-icons/fa';
 import { GoPlay } from 'react-icons/go';
 import { ImCheckboxChecked } from 'react-icons/im';
@@ -44,3 +45,10 @@ const LessonItem = ({ lesson, idx, setActiveLessonIdx, activeLessonIdx }) => {
 };
 
 export default LessonItem;
+
+LessonItem.propTypes = {
+  lesson: PropTypes.object.isRequired,
+  idx: PropTypes.number.isRequired,
+  setActiveLessonIdx: PropTypes.func.isRequired,
+  activeLessonIdx: PropTypes.number.isRequired,
+};

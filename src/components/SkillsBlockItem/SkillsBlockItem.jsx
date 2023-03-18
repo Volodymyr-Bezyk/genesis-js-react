@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { VscDebugBreakpointData } from 'react-icons/vsc';
 import { SkillsListText } from './SkillsBlockItem.styled';
 
@@ -11,3 +12,7 @@ const SkillsBlockItem = ({ text }) => {
 };
 
 export default SkillsBlockItem;
+
+SkillsBlockItem.propTypes = {
+  text: PropTypes.string,
+};

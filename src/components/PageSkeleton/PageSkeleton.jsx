@@ -1,8 +1,8 @@
 import { PageSkeletonWrap } from './PageSkeleton.styled';
 
-const PageSkeleton = props => {
+const PageSkeleton = () => {
   return (
-    <PageSkeletonWrap viewBox="0 0 500 300" {...props}>
+    <PageSkeletonWrap viewBox="0 0 500 300">
       <rect x="0" y="8" rx="0" ry="0" width="40" height="18" />
       <circle cx="492" cy="16" r="8" />
       <circle cx="472" cy="16" r="8" />

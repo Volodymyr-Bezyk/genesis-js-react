@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { GiSkills } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -47,3 +48,9 @@ const SkillsBlock = ({ skills = [], tags = [] }) => {
   );
 };
 export default SkillsBlock;
+
+SkillsBlock.propTypes = {
+  skill: PropTypes.string,
+  tags: PropTypes.array,
+  skills: PropTypes.array,
+};

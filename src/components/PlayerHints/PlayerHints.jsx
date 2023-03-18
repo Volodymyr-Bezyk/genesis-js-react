@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Hint,
   HintsWrap,
@@ -36,3 +37,7 @@ const PlayerHints = ({ videoRef }) => {
 };
 
 export default PlayerHints;
+
+PlayerHints.propTypes = {
+  videoRef: PropTypes.object.isRequired,
+};

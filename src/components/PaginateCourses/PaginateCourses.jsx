@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Box from 'components/Box';
 import { PaginationWrap, Pagination } from './PaginateCourses.styled';
 
@@ -23,3 +24,9 @@ const PaginateCourse = ({ handlePageClick, pageCount, itemOffset }) => {
 };
 
 export default PaginateCourse;
+
+PaginateCourse.propTypes = {
+  handlePageClick: PropTypes.func.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  itemOffset: PropTypes.number.isRequired,
+};

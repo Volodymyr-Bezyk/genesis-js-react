@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import Hls from 'hls.js';
@@ -35,7 +36,6 @@ const CourseCard = ({ course }) => {
 
   useEffect(() => {
     hls.current.loadSource(courseVideoPreview?.link ?? test);
-
     hls.current.attachMedia(videoRef.current);
   }, [courseVideoPreview?.link, isHovering]);
 
@@ -51,7 +51,8 @@ const CourseCard = ({ course }) => {
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           autoPlay={isHovering}
-        ></Video>
+        />
+
         <LessonsRatingList>
           <LessonsRatingItem>
             <LessonsRatingValue>{lessonsCount}</LessonsRatingValue>
@@ -62,10 +63,8 @@ const CourseCard = ({ course }) => {
             <LessonsRatingDesc>Rating</LessonsRatingDesc>
           </LessonsRatingItem>
           <LessonsRatingItem>
-            <LessonsRatingValue>
-              {Math.round(+duration / 3600)}
-            </LessonsRatingValue>
-            <LessonsRatingDesc>Hours</LessonsRatingDesc>
+            <LessonsRatingValue>{Math.round(duration / 60)}</LessonsRatingValue>
+            <LessonsRatingDesc>Mins</LessonsRatingDesc>
           </LessonsRatingItem>
         </LessonsRatingList>
       </VideoLink>
@@ -76,3 +75,18 @@ const CourseCard = ({ course }) => {
 };
 
 export default CourseCard;
+
+CourseCard.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  previewImageLink: PropTypes.string,
+  description: PropTypes.string,
+  duration: PropTypes.number,
+  lessonsCount: PropTypes.number,
+  rating: PropTypes.number,
+  tags: PropTypes.array,
+  meta: PropTypes.shape({
+    courseVideoPreview: PropTypes.string,
+    skills: PropTypes.array,
+  }),
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Title } from './PageTitle.styled';
 
 const PageTitle = ({ title }) => {
@@ -5,3 +6,7 @@ const PageTitle = ({ title }) => {
 };
 
 export default PageTitle;
+
+PageTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { BsStarFill } from 'react-icons/bs';
 import { dateFormatter } from 'utils/dateFormatter';
 
@@ -24,3 +25,9 @@ const CourseMainInfo = ({ title, launchDate, rating }) => {
   );
 };
 export default CourseMainInfo;
+
+CourseMainInfo.propTypes = {
+  title: PropTypes.string,
+  launchDate: PropTypes.string,
+  rating: PropTypes.number,
+};

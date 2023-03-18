@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Hls from 'hls.js';
 import toast from 'react-hot-toast';
 import { useRef, useEffect } from 'react';
@@ -77,3 +78,10 @@ const MainVideoPlayer = ({ courseId, lessons, activeLessonIdx, time }) => {
 };
 
 export default MainVideoPlayer;
+
+MainVideoPlayer.propTypes = {
+  courseId: PropTypes.string.isRequired,
+  lessons: PropTypes.array.isRequired,
+  activeLessonIdx: PropTypes.number.isRequired,
+  time: PropTypes.number.isRequired,
+};

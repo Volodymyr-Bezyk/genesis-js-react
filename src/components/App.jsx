@@ -23,7 +23,6 @@ export const App = () => {
             element={<PrivateRoute redirectTo="/login" component={<Home />} />}
           />
           <Route path="dashboard" element={<DashBoard />} />
-          {/* <Route path="course/:courseId" element={<Course />} /> */}
           <Route
             path="course/:courseId"
             element={

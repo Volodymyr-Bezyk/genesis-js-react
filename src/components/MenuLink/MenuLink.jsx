@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { MenuLink, MenuLinkText } from './MenuLink.styled';
 
 const MobileMenuLink = ({ title, icon, path, setShowMenu }) => {
@@ -10,3 +11,10 @@ const MobileMenuLink = ({ title, icon, path, setShowMenu }) => {
 };
 
 export default MobileMenuLink;
+
+MobileMenuLink.propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.object,
+  path: PropTypes.string.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
+};

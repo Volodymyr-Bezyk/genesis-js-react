@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import LessonItem from 'components/LessonItem';
 import {
   LessonsTitle,
@@ -29,3 +30,9 @@ const Lessons = ({ lessons, setActiveLessonIdx, activeLessonIdx }) => {
 };
 
 export default Lessons;
+
+Lessons.propTypes = {
+  lessons: PropTypes.array.isRequired,
+  setActiveLessonIdx: PropTypes.func.isRequired,
+  activeLessonIdx: PropTypes.number.isRequired,
+};
