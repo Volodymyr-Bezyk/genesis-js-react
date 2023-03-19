@@ -7,9 +7,6 @@ export const LessonWrap = styled.div`
 export const LessonVideoWrap = styled.div`
   position: relative;
   transition: ${p => p.theme.transitions.borderColor};
-  border: 3px solid
-    ${p =>
-      p.current ? p.theme.colors.primaryIcon : p.theme.colors.transparent};
 `;
 
 export const AvailableLesson = styled.video`
