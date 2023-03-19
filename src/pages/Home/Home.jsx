@@ -10,6 +10,7 @@ import CourseCard from 'components/CourseCard';
 import PaginateCourses from 'components/PaginateCourses';
 import Error from 'components/Error';
 import { selectFilter, selectCoursesError, selectToken } from 'redux/selectors';
+import { sortCoursesByDescending } from 'utils/sortCoursesByDescending';
 
 import { CoursesList, CoursesItem } from './Home.styled';
 
@@ -17,6 +18,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const courses = useSelector(selectFilteredCourses);
+  sortCoursesByDescending(courses);
+
   const filter = useSelector(selectFilter);
   const error = useSelector(selectCoursesError);
 

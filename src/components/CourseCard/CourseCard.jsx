@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import Hls from 'hls.js';
 import SkillsBlock from 'components/SkillsBlock';
+import { dateFormatter } from 'utils/dateFormatter';
 
 import {
   CourseCardWrap,
@@ -14,6 +15,8 @@ import {
   LessonsRatingItem,
   LessonsRatingValue,
   LessonsRatingDesc,
+  LoadedDateWrap,
+  LoadedDateText,
 } from './CourseCard.styled';
 
 const CourseCard = ({ course }) => {
@@ -26,6 +29,7 @@ const CourseCard = ({ course }) => {
     lessonsCount,
     rating,
     tags,
+    launchDate,
     meta: { courseVideoPreview, skills },
   } = course;
 
@@ -67,6 +71,13 @@ const CourseCard = ({ course }) => {
             <LessonsRatingDesc>Mins</LessonsRatingDesc>
           </LessonsRatingItem>
         </LessonsRatingList>
+
+        {launchDate && (
+          <LoadedDateWrap>
+            <LoadedDateText>Loaded:</LoadedDateText>
+            <LoadedDateText>{dateFormatter(launchDate)}</LoadedDateText>
+          </LoadedDateWrap>
+        )}
       </VideoLink>
       <CoursesText>{description}</CoursesText>
       <SkillsBlock skills={skills} tags={tags} />
@@ -85,6 +96,7 @@ CourseCard.propTypes = {
   lessonsCount: PropTypes.number,
   rating: PropTypes.number,
   tags: PropTypes.array,
+  launchDate: PropTypes.string,
   meta: PropTypes.shape({
     courseVideoPreview: PropTypes.string,
     skills: PropTypes.array,

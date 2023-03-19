@@ -10,10 +10,26 @@ export const selectIsLoggedIn = state => state.auth.isLoggedIn;
 export const selectIsRefreshing = state => state.auth.isRefreshing;
 export const selectIsLoadingAuth = state => state.auth.isLoading;
 
+// export const selectSortedCourses = createSelector([selectCourses], courses => {
+//   const sortedCourses = courses.sort(
+//     (firstCourse, secondCourse) =>
+//       Date.parse(secondCourse?.launchDate ?? 0) -
+//       Date.parse(firstCourse?.launchDate ?? 0)
+//   );
+// });
+
 export const selectFilteredCourses = createSelector(
   [selectCourses, selectFilter],
   (courses, filter) => {
     const normalizedFilter = filter.toLowerCase();
+
+    // courses.map(course => console.log(Date.parse(course.launchDate)));
+    // courses.sort(
+    //   (firstCourse, secondCourse) =>
+    //     Date.parse(secondCourse.launchDate) - Date.parse(firstCourse.launchDate)
+    // );
+
+    // console.log('sorted', courses);
 
     return courses.filter(({ title }) =>
       title.toLowerCase().includes(normalizedFilter)

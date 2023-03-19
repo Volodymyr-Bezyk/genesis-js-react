@@ -77,3 +77,22 @@ export const LessonsRatingDesc = styled.p`
   line-height: 1;
   color: ${p => p.theme.colors.primaryLink};
 `;
+
+export const LoadedDateWrap = styled.div`
+  display: none;
+
+  @media (min-width: ${p => p.theme.screens.tablet}) {
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    text-align: right;
+  }
+`;
+
+export const LoadedDateText = styled.p`
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes[3]}px;
+  line-height: 1;
+  color: ${p => p.theme.colors.primaryIcon};
+`;
