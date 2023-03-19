@@ -33,7 +33,9 @@ export const register = createAsyncThunk(
       toast.success(`Congratulation! You logged in`);
       return { user: { name: displayName, email }, token };
     } catch (error) {
-      toast.error(` Please check your credentials and try again.`);
+      toast.error(
+        `${error.message}/ Please check your credentials and try again.`
+      );
       return thunkApi.rejectWithValue(error.code, error.message);
     }
   }
@@ -54,7 +56,9 @@ export const login = createAsyncThunk(
       toast.success(`Congratulation! You logged in`);
       return { user: { name: displayName, email }, token };
     } catch (error) {
-      toast.error(` Please check your credentials and try again.`);
+      toast.error(
+        `${error.message}/ Please check your credentials and try again.`
+      );
       return thunkApi.rejectWithValue(error.message);
     }
   }
