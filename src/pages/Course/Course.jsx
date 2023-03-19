@@ -6,6 +6,7 @@ import PageWrap from 'components/PageWrap';
 import CourseMainInfo from 'components/CourseMainInfo';
 import Lessons from 'components/Lessons';
 import MainVideoPlayer from 'components/MainVideoPlayer';
+import Error from 'components/Error';
 
 import { selectToken } from 'redux/selectors';
 import { getOneCourseById } from 'utils/getOneCourseById';
@@ -15,7 +16,7 @@ import { useLocalStorageOneTime } from 'hooks/useLocalStorage';
 const Course = () => {
   const { courseId } = useParams();
   const [isLoading, setLoading] = useState(false);
-  const [, setError] = useState(null);
+  const [error, setError] = useState(null);
   const [course, setCourse] = useState(null);
   const [idx, time] = useLocalStorageOneTime(constants.LS_KEY, courseId);
   const [activeLessonIdx, setActiveLessonIdx] = useState(idx);
@@ -58,18 +59,27 @@ const Course = () => {
 
   return (
     <PageWrap>
-      <CourseMainInfo title={title} launchDate={launchDate} rating={rating} />
-      <MainVideoPlayer
-        lessons={lessons}
-        activeLessonIdx={activeLessonIdx}
-        time={currentTime}
-        courseId={id}
-      />
-      <Lessons
-        setActiveLessonIdx={handleLessonChange}
-        activeLessonIdx={activeLessonIdx}
-        lessons={lessons}
-      />
+      {error && <Error message={error.message} />}
+      {!error && (
+        <>
+          <CourseMainInfo
+            title={title}
+            launchDate={launchDate}
+            rating={rating}
+          />
+          <MainVideoPlayer
+            lessons={lessons}
+            activeLessonIdx={activeLessonIdx}
+            time={currentTime}
+            courseId={id}
+          />
+          <Lessons
+            setActiveLessonIdx={handleLessonChange}
+            activeLessonIdx={activeLessonIdx}
+            lessons={lessons}
+          />
+        </>
+      )}
     </PageWrap>
   );
 };

@@ -8,16 +8,17 @@ import PageWrap from 'components/PageWrap';
 import HomeBar from 'components/HomeBar';
 import CourseCard from 'components/CourseCard';
 import PaginateCourses from 'components/PaginateCourses';
-import { selectFilter } from 'redux/selectors';
+import Error from 'components/Error';
+import { selectFilter, selectCoursesError, selectToken } from 'redux/selectors';
 
 import { CoursesList, CoursesItem } from './Home.styled';
-import { selectToken } from 'redux/selectors';
 
 const Home = () => {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const courses = useSelector(selectFilteredCourses);
   const filter = useSelector(selectFilter);
+  const error = useSelector(selectCoursesError);
 
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + 10;
@@ -41,20 +42,25 @@ const Home = () => {
 
   return (
     <PageWrap>
-      <HomeBar />
-      <CoursesList>
-        {currentCourses.map(course => (
-          <CoursesItem key={course.id}>
-            <CourseCard course={course} />
-          </CoursesItem>
-        ))}
-      </CoursesList>
+      {error && <Error message={error.message} />}
+      {!error && (
+        <>
+          <HomeBar />
+          <CoursesList>
+            {currentCourses.map(course => (
+              <CoursesItem key={course.id}>
+                <CourseCard course={course} />
+              </CoursesItem>
+            ))}
+          </CoursesList>
 
-      <PaginateCourses
-        handlePageClick={handlePageClick}
-        pageCount={pageCount}
-        itemOffset={itemOffset}
-      />
+          <PaginateCourses
+            handlePageClick={handlePageClick}
+            pageCount={pageCount}
+            itemOffset={itemOffset}
+          />
+        </>
+      )}
     </PageWrap>
   );
 };

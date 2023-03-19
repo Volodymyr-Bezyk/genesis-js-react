@@ -63,6 +63,7 @@ export const logout = createAsyncThunk('user/logout', async (_, thunkApi) => {
   try {
     await auth.signOut();
     clearAuthHeader();
+    toast.success(` You are logged out`);
     return;
   } catch (error) {
     console.log(error.message);

@@ -7,7 +7,7 @@ const coursesSlice = createSlice({
   initialState: {
     courses: [],
     isLoading: false,
-    error: null,
+    isError: null,
     selectedCourse: null,
   },
   extraReducers: builder =>
